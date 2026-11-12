@@ -81,3 +81,8 @@ Las expresiones solo pueden usar los hechos de `docs/FACTS.md`; cualquier otro n
 - Datos en `%APPDATA%\VergilHud`: `hud.db`, `settings.json`, `hud-profiles.json`, `leak-baselines.json` (rangos objetivo editables), `custom-stats.json`,
   `backups\` (una copia al día, se guardan 5), `reports\` (informe semanal HTML) y `logs\` (14 días).
 - La app nunca abre una conexión de red (hay una prueba que lo vigila). Las actualizaciones son manuales.
+
+## Aviso y licencia
+- Proyecto personal e independiente: **no está afiliado a PokerStars**. Solo muestra estadísticas históricas de manos ya jugadas y no da consejos en vivo.
+  Revisa siempre las normas de herramientas permitidas vigentes de la sala antes de usarlo en mesas reales.
+- Licencia [MIT](LICENSE) · © 2026 Jorge Bussh. Dependencias y marcas en [NOTICE.md](NOTICE.md).
