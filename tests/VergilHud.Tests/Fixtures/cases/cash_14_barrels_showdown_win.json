@@ -1,0 +1,5 @@
+{"Hero":{"position":"BTN","pf_open":1,"f_cbet_opp":1,"f_cbet":1,"t_cbet_opp":1,"t_cbet":1,"r_cbet_opp":1,"r_cbet":1,"wtsd":1,"wsd":1,"wwsf":1,
+   "hole_cards":"Ac Kd","f_bet_size_pct":61.5385,"t_bet_size_pct":68.9655,"r_bet_size_pct":72.4638,"r_bet_size_bucket":"medium","net":85},
+ "Villain2":{"position":"BB","f_fcb_opp":1,"f_fcb":0,"t_fcb_opp":1,"t_fcb":0,"r_fcb_opp":1,"r_fcb":0,"wtsd":1,"wsd":0,"hole_cards":"9c 9d",
+   "f_check_raise_opp":1,"f_check_raise":0,"f_faced_size_bucket":"medium","net":-84},
+ "Villain1":{"net":-1}}

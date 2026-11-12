@@ -1,0 +1,7 @@
+{"_hand":{"format":"cash","players":6,"rake":0,"pot":2,"tournament_id":null},
+ "Hero":{"position":"BTN","pf_open_opp":1,"pf_steal_opp":1,"pf_vpip":0,"hole_cards":"7c 2d","is_hero":1,"net":0,"stack_bucket":"40+","stack_bb":100},
+ "Villain1":{"position":"SB","pf_steal_opp":1,"net":-1},
+ "Villain2":{"position":"BB","net":1,"pf_open_opp":0,"f_saw":0},
+ "Villain3":{"position":"UTG","pf_open_opp":1,"pf_steal_opp":0},
+ "Villain4":{"position":"HJ"},
+ "Villain5":{"position":"CO","pf_steal_opp":1}}

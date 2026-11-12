@@ -1,0 +1,4 @@
+{"_hand":{"format":"mtt","tournament_id":"900001","buyin":1100,"level":3,"ante":5,"players":4,"pot":70},
+ "Hero":{"position":"BTN","stack_bb":30,"stack_bucket":"20-40","m_ratio":15.7895,"net":-5,"pf_steal_opp":1},
+ "Villain2":{"position":"BB","net":40},
+ "Villain1":{"net":-30}}

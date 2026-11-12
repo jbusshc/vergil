@@ -1,0 +1,4 @@
+{"_hand":{"format":"spin","buyin":2,"level":1,"players":3},
+ "Hero":{"position":"BTN","stack_bb":12.5,"stack_bucket":"10-20","pf_shove_opp":1,"pf_shove":1,"pf_allin":1,"pf_open":1,"wsd":1,"net":520},
+ "Villain2":{"pf_call_shove_opp":1,"pf_call_shove":1,"wtsd":1,"wsd":0,"net":-500},
+ "Villain1":{"pf_fts_opp":1,"pf_fts":1,"net":-20}}

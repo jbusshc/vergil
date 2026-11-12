@@ -1,0 +1,5 @@
+{"Villain3":{"pf_limp":1,"pf_vpip":1,"pf_pfr":0,"pf_limped_pot":1,"pf_open_opp":1,"pf_open":0,"f_bets":1,"f_ip":1,
+   "f_cbet_opp":0,"f_float_bet_opp":0,"f_donk_opp":0,"f_bet_size_pct":66.6667,"net":4},
+ "Villain1":{"pf_sb_complete":1,"pf_limp":1,"net":-2},
+ "Villain2":{"pf_vpip":0,"pf_open_opp":0,"net":-2},
+ "Hero":{"pf_open_opp":0,"pf_steal_opp":0}}

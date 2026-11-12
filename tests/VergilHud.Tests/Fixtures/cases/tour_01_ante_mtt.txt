@@ -1,0 +1,24 @@
+PokerStars Hand #200000001: Tournament #900001, 1000+100 Hold'em No Limit - Level III (25/50) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+Table '900001 1' 6-max Seat #4 is the button
+Seat 1: Villain1 (1500 in chips)
+Seat 2: Villain2 (1500 in chips)
+Seat 3: Villain3 (1500 in chips)
+Seat 4: Hero (1500 in chips)
+Villain1: posts the ante 5
+Villain2: posts the ante 5
+Villain3: posts the ante 5
+Hero: posts the ante 5
+Villain1: posts small blind 25
+Villain2: posts big blind 50
+*** HOLE CARDS ***
+Dealt to Hero [8s 8d]
+Villain3: folds
+Hero: folds
+Villain1: folds
+Uncalled bet (25) returned to Villain2
+Villain2 collected 70 from pot
+*** SUMMARY ***
+Total pot 70 | Rake 0
+
+
+

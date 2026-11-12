@@ -1,0 +1,23 @@
+PokerStars Hand #100000020:  Hold'em No Limit ($0.05/$0.10 USD) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+Table 'Alpha' 6-max Seat #3 is the button
+Seat 1: Villain1 ($10.00 in chips)
+Seat 2: Villain2 ($10.00 in chips)
+Seat 3: Hero ($10.00 in chips)
+Villain1: posts small blind $0.05
+Villain2: posts big blind $0.10
+*** HOLE CARDS ***
+Dealt to Hero [Ad 8d]
+Hero: raises $0.15 to $0.25
+Villain1: folds
+Villain2: calls $0.15
+*** FLOP *** [Qc 8c 2d]
+Villain2: checks
+Hero: bets $0.30
+Villain2: folds
+Uncalled bet ($0.30) returned to Hero
+Hero collected $0.55 from pot
+*** SUMMARY ***
+Total pot $0.55 | Rake $0
+
+
+

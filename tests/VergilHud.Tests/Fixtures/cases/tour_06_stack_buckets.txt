@@ -1,0 +1,20 @@
+PokerStars Hand #200000006: Tournament #900006, 1000+100 Hold'em No Limit - Level V (20/40) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+Table '900006 1' 9-max Seat #4 is the button
+Seat 1: Villain1 (150 in chips)
+Seat 2: Villain2 (450 in chips)
+Seat 3: Villain3 (1500 in chips)
+Seat 4: Hero (3000 in chips)
+Villain1: posts small blind 20
+Villain2: posts big blind 40
+*** HOLE CARDS ***
+Dealt to Hero [Qc 3h]
+Villain3: folds
+Hero: folds
+Villain1: folds
+Uncalled bet (20) returned to Villain2
+Villain2 collected 40 from pot
+*** SUMMARY ***
+Total pot 40 | Rake 0
+
+
+

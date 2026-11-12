@@ -1,0 +1,4 @@
+{"_hand":{"players":2},
+ "Hero":{"position":"SB","pf_open_opp":1,"pf_open":1,"pf_steal_opp":1,"pf_steal":1,"f_ip":1,"f_cbet_opp":1,"f_cbet":1,"f_cbet_ip":1,"net":6},
+ "Villain1":{"position":"BB","pf_fts_opp":1,"pf_fts":0,"pf_bb_defend_opp":1,"pf_bb_defend":1,"f_ip":0,"f_donk_opp":1,"f_donk":0,
+   "f_fcb_opp":1,"f_fcb":1,"net":-6}}

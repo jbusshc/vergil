@@ -1,0 +1,3 @@
+{"Villain2":{"t_check_raise_opp":1,"t_check_raise":1,"t_raise_cb_opp":1,"t_raise_cb":1,"net":35},
+ "Hero":{"t_cbet_opp":1,"t_cbet":1,"t_faced_size_bucket":"medium","t_folds":1,"net":-34},
+ "Villain1":{"net":-1}}

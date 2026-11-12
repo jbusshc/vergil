@@ -1,0 +1,4 @@
+{"Hero":{"pf_open":1,"pf_4bet_opp":1,"pf_4bet":1,"pf_allin":1,"went_allin":1,"pf_shove":0,"pf_shove_opp":1,"pf_5bet":0,"pf_call_shove_opp":0,
+   "f_saw":1,"t_saw":1,"r_saw":1,"wtsd":1,"wsd":1,"f_cbet_opp":0,"net":201},
+ "Villain2":{"pf_3bet":1,"pf_f4b_opp":1,"pf_f4b":0,"pf_call_shove_opp":1,"pf_call_shove":1,"pf_allin":1,"wtsd":1,"wsd":0,"net":-200},
+ "Villain1":{"net":-1}}

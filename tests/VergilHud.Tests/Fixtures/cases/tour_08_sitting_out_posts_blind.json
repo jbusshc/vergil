@@ -1,0 +1,4 @@
+{"_hand":{"format":"spin","players":3,"level":2},
+ "Villain1":{"position":"BB","net":-30},
+ "Hero":{"position":"SB","net":30,"pf_open":1},
+ "Villain2":{"position":"BTN","net":0}}

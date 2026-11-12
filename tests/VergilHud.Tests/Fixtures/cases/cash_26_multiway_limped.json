@@ -1,0 +1,4 @@
+{"Hero":{"f_multiway":1,"f_saw":1,"f_ip":1,"pf_limp":1,"pf_limped_pot":1,"f_float_bet_opp":0,"f_cbet_opp":0,"f_bets":1,"net":6},
+ "Villain1":{"f_multiway":1,"f_saw":1,"f_ip":0,"pf_sb_complete":1,"net":-2},
+ "Villain2":{"f_multiway":1,"pf_vpip":0,"net":-2},
+ "Villain3":{"f_multiway":1,"net":-2}}

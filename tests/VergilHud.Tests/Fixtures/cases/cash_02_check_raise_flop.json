@@ -1,0 +1,9 @@
+{"_hand":{"players":6},
+ "Hero":{"position":"BB","pf_vpip":1,"pf_bb_defend_opp":1,"pf_bb_defend":1,"pf_cold_call_opp":0,"pf_3bet_opp":1,"pf_3bet":0,
+   "f_saw":1,"f_ip":0,"f_fcb_opp":1,"f_fcb":0,"f_raise_cb_opp":1,"f_raise_cb":1,"f_check_raise_opp":1,"f_check_raise":1,
+   "f_faced_size_bucket":"medium","f_checks":1,"f_raises":1,"t_saw":1,"t_cbet_opp":1,"t_cbet":0,
+   "r_probe_opp":1,"r_probe":1,"r_bets":1,"r_bet_size_pct":49.1803,"r_bet_size_bucket":"medium","wwsf":1,"net":31},
+ "Villain2":{"position":"UTG","pf_open_opp":1,"pf_open":1,"pf_open_size_bb":3,"pf_pfr":1,"pf_steal_opp":0,
+   "f_cbet_opp":1,"f_cbet":1,"f_cbet_ip":1,"f_cbet_size_pct":46.1538,"f_bet_size_bucket":"medium",
+   "t_float_bet_opp":1,"t_float_bet":0,"r_folds":1,"r_faced_size_bucket":"medium","net":-30},
+ "Villain1":{"position":"SB","net":-1}}

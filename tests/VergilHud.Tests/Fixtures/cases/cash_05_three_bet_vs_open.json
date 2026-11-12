@@ -1,0 +1,4 @@
+{"Villain3":{"position":"CO","pf_open":1,"pf_steal_opp":1,"pf_steal":1,"pf_f3b_opp":1,"pf_f3b":1,"pf_4bet_opp":1,"pf_4bet":0,"net":-6},
+ "Hero":{"position":"BTN","pf_3bet_opp":1,"pf_3bet":1,"pf_resteal":1,"pf_3bet_vs_steal":0,"pf_3bet_pot":1,"pf_open_opp":0,
+   "pf_cold_call_opp":1,"pf_cold_call":0,"net":9},
+ "Villain1":{"pf_fts_opp":0,"pf_3bet_opp":0}}

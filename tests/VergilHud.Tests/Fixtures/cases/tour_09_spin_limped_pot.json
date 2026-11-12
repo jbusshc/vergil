@@ -1,0 +1,4 @@
+{"_hand":{"format":"spin"},
+ "Hero":{"pf_limp":1,"pf_vpip":1,"pf_limped_pot":1,"pf_open_opp":1,"pf_open":0,"f_bets":1,"f_ip":1,"wtsd":1,"wsd":0,"net":-100},
+ "Villain1":{"pf_sb_complete":1,"net":-40,"f_folds":1},
+ "Villain2":{"pf_open_opp":0,"wtsd":1,"wsd":1,"net":140}}

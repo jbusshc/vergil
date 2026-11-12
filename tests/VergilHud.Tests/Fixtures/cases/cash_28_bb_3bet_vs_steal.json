@@ -1,0 +1,4 @@
+{"Villain2":{"position":"BB","pf_3bet_opp":1,"pf_3bet":1,"pf_3bet_vs_steal_opp":1,"pf_3bet_vs_steal":1,"pf_resteal":1,
+   "pf_bb_defend_opp":1,"pf_bb_defend":1,"net":7},
+ "Hero":{"pf_steal":1,"pf_f3b_opp":1,"pf_f3b":1,"net":-6},
+ "Villain1":{"pf_fts_opp":1,"pf_fts":1,"net":-1}}

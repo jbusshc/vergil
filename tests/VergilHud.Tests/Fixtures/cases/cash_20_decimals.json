@@ -1,0 +1,4 @@
+{"_hand":{"pot":0.55},
+ "Hero":{"net":0.3,"net_bb":3,"big_blind":0.1,"pf_open_size_bb":2.5,"f_bet_size_pct":54.5455,"stack_bb":100},
+ "Villain2":{"net":-0.25},
+ "Villain1":{"net":-0.05}}

@@ -1,0 +1,39 @@
+<Window x:Class="VergilHud.App.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Vergil HUD" Height="780" Width="1280" MinWidth="1000" MinHeight="580"
+        Background="{DynamicResource WinBg}" Foreground="{DynamicResource WinFg}" FontFamily="Segoe UI" FontSize="13">
+    <Window.Resources>
+        <Style TargetType="TabControl">
+            <Setter Property="Background" Value="{DynamicResource WinBg}"/>
+        </Style>
+        <Style TargetType="TabItem">
+            <Setter Property="Foreground" Value="{DynamicResource TabFg}"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="TabItem">
+                        <Border x:Name="Bd" Background="{DynamicResource TabBg}" Padding="14,6" Margin="0,0,2,0" CornerRadius="4,4,0,0">
+                            <ContentPresenter x:Name="Cp" ContentSource="Header" TextElement.Foreground="{DynamicResource TabFg}"/>
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabHover}"/>
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter TargetName="Bd" Property="Background" Value="{DynamicResource TabSel}"/>
+                                <Setter TargetName="Cp" Property="TextElement.Foreground" Value="{DynamicResource TabSelFg}"/>
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+        <Style TargetType="ComboBox">
+            <Setter Property="Foreground" Value="{DynamicResource ComboFg}"/>
+        </Style>
+        <Style TargetType="ProgressBar">
+            <Setter Property="Foreground" Value="#6AA9FF"/>
+            <Setter Property="Background" Value="{DynamicResource ProgBg}"/>
+        </Style>
+    </Window.Resources>
+</Window>

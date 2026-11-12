@@ -1,0 +1,3 @@
+{"Villain1":{"position":"SB","pf_pfr":1,"pf_allin":1,"pf_open_opp":0,"pf_limp":0,"stack_bb":3.75,"stack_bucket":"<10","f_saw":1,"wtsd":1,"wsd":0,"net":-150},
+ "Villain2":{"position":"BB","pf_call_shove_opp":1,"pf_call_shove":1,"f_bets":1,"went_allin":1,"f_donk_opp":0,"wtsd":1,"net":-300},
+ "Hero":{"position":"BTN","pf_limp":1,"pf_limp_call":1,"pf_call_shove_opp":1,"pf_call_shove":1,"f_calls":1,"f_fcb_opp":0,"wtsd":1,"wsd":1,"wwsf":1,"net":450}}

@@ -1,0 +1,17 @@
+[
+  { "id": "vpip", "stat": "vpip", "label": "VPIP", "lo": 0.20, "hi": 0.28, "hint": "Entras en demasiados o en muy pocos botes." },
+  { "id": "pfr", "stat": "pfr", "label": "PFR", "lo": 0.15, "hi": 0.24, "hint": "Subes preflop con una frecuencia fuera de lo habitual." },
+  { "id": "rfi_utg", "stat": "rfi", "label": "Apertura desde UTG", "positions": ["UTG"], "lo": 0.13, "hi": 0.20 },
+  { "id": "rfi_co", "stat": "rfi", "label": "Apertura desde CO", "positions": ["CO"], "lo": 0.25, "hi": 0.36 },
+  { "id": "rfi_btn", "stat": "rfi", "label": "Apertura desde BTN", "positions": ["BTN"], "lo": 0.38, "hi": 0.52 },
+  { "id": "rfi_sb", "stat": "rfi", "label": "Apertura desde SB", "positions": ["SB"], "lo": 0.30, "hi": 0.48 },
+  { "id": "f3b", "stat": "f3b", "label": "Fold a 3-Bet", "lo": 0.50, "hi": 0.62, "hint": "Si foldeas demasiado te explotan con 3-Bets; si foldeas poco pagas de más fuera de posición." },
+  { "id": "3bet", "stat": "3bet", "label": "3-Bet", "lo": 0.05, "hi": 0.10 },
+  { "id": "fts", "stat": "fts", "label": "Fold a robo (ciegas)", "lo": 0.55, "hi": 0.75 },
+  { "id": "steal", "stat": "steal", "label": "Robo de ciegas", "positions": ["CO", "BTN", "SB"], "lo": 0.30, "hi": 0.50 },
+  { "id": "cbet_flop", "stat": "cbet_flop", "label": "C-Bet en flop", "lo": 0.50, "hi": 0.70 },
+  { "id": "cbet_turn", "stat": "cbet_turn", "label": "Segundo barril", "lo": 0.38, "hi": 0.58 },
+  { "id": "fcb_flop", "stat": "fcb_flop", "label": "Fold a C-Bet en flop", "lo": 0.35, "hi": 0.55 },
+  { "id": "wtsd", "stat": "wtsd", "label": "WTSD", "lo": 0.24, "hi": 0.32, "hint": "Llegas a showdown demasiado o demasiado poco." },
+  { "id": "wsd", "stat": "wsd", "label": "W$SD", "lo": 0.48, "hi": 0.58 }
+]

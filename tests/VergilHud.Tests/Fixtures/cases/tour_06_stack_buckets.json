@@ -1,0 +1,5 @@
+{"_hand":{"format":"mtt","players":4},
+ "Villain1":{"stack_bb":3.75,"stack_bucket":"<10","eff_stack_bb":3.75,"net":-20},
+ "Villain2":{"stack_bb":11.25,"stack_bucket":"10-20","net":20},
+ "Villain3":{"stack_bb":37.5,"stack_bucket":"20-40"},
+ "Hero":{"stack_bb":75,"stack_bucket":"40+","eff_stack_bb":37.5}}

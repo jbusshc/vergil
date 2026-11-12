@@ -1,0 +1,14 @@
+# Compilación
+bin/
+obj/
+dist/
+*.user
+.vs/
+*.suo
+
+# Datos locales: nunca se versionan
+*.db
+*.db-shm
+*.db-wal
+TestResults/
+*.log

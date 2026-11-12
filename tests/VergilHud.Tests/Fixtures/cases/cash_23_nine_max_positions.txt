@@ -1,0 +1,30 @@
+PokerStars Hand #100000023:  Hold'em No Limit ($1/$2 USD) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+Table 'Alpha' 9-max Seat #9 is the button
+Seat 1: Villain1 ($200 in chips)
+Seat 2: Villain2 ($200 in chips)
+Seat 3: Villain3 ($200 in chips)
+Seat 4: Villain4 ($200 in chips)
+Seat 5: Villain5 ($200 in chips)
+Seat 6: Villain6 ($200 in chips)
+Seat 7: Villain7 ($200 in chips)
+Seat 8: Villain8 ($200 in chips)
+Seat 9: Hero ($200 in chips)
+Villain1: posts small blind $1
+Villain2: posts big blind $2
+*** HOLE CARDS ***
+Dealt to Hero [5d 3c]
+Villain3: folds
+Villain4: folds
+Villain5: folds
+Villain6: folds
+Villain7: folds
+Villain8: folds
+Hero: folds
+Villain1: folds
+Uncalled bet ($1) returned to Villain2
+Villain2 collected $2 from pot
+*** SUMMARY ***
+Total pot $2 | Rake $0
+
+
+

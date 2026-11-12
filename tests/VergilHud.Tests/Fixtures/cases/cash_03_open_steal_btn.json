@@ -1,0 +1,5 @@
+{"_hand":{"players":6},
+ "Hero":{"position":"BTN","pf_open_opp":1,"pf_open":1,"pf_steal_opp":1,"pf_steal":1,"pf_pfr":1,"pf_vpip":1,"pf_open_size_bb":2.5,"net":3,"f_saw":0},
+ "Villain1":{"position":"SB","pf_fts_opp":1,"pf_fts":1,"pf_3bet_vs_steal_opp":1,"pf_3bet_vs_steal":0,"net":-1},
+ "Villain2":{"position":"BB","pf_fts_opp":1,"pf_fts":1,"pf_bb_defend_opp":1,"pf_bb_defend":0,"net":-2},
+ "Villain3":{"pf_steal_opp":0,"pf_cold_call_opp":0}}

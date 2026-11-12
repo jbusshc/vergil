@@ -1,0 +1,21 @@
+PokerStars Hand #200000007: Tournament #900007, $4.60+$4.60+$0.80 USD Hold'em No Limit - Level XII (400/800) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+Table '900007 1' 6-max Seat #3 is the button
+Seat 1: Villain1 (20000 in chips)
+Seat 2: Villain2 (20000 in chips)
+Seat 3: Hero (20000 in chips)
+Villain1: posts the ante 100
+Villain2: posts the ante 100
+Hero: posts the ante 100
+Villain1: posts small blind 400
+Villain2: posts big blind 800
+*** HOLE CARDS ***
+Dealt to Hero [Js 5d]
+Hero: folds
+Villain1: folds
+Uncalled bet (400) returned to Villain2
+Villain2 collected 1100 from pot
+*** SUMMARY ***
+Total pot 1100 | Rake 0
+
+
+

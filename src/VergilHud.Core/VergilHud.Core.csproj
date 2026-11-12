@@ -1,0 +1,25 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <Nullable>enable</Nullable>
+    <!-- El evaluador de manos y los cálculos de equity son muy intensivos: se optimizan también en Debug (los tests duran segundos, no minutos). -->
+    <Optimize>true</Optimize>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Data.Sqlite" Version="8.0.11" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <InternalsVisibleTo Include="VergilHud.Tests" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <EmbeddedResource Include="Stats\builtin-stats.json" LogicalName="builtin-stats.json" />
+    <EmbeddedResource Include="Stats\autonotes.json" LogicalName="autonotes.json" />
+    <EmbeddedResource Include="Stats\leak-baselines.json" LogicalName="leak-baselines.json" />
+  </ItemGroup>
+
+</Project>

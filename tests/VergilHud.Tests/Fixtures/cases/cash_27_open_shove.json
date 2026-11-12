@@ -1,0 +1,4 @@
+{"Hero":{"pf_shove_opp":1,"pf_shove":1,"pf_open":1,"pf_allin":1,"pf_open_size_bb":100,"wsd":1,"net":201},
+ "Villain2":{"pf_call_shove_opp":1,"pf_call_shove":1,"pf_allin":1,"wsd":0,"wtsd":1,"net":-200},
+ "Villain3":{"pf_open_opp":1,"pf_shove_opp":1,"pf_shove":0},
+ "Villain1":{"pf_fts_opp":1,"pf_fts":1,"net":-1}}
