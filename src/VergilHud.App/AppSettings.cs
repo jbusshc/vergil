@@ -26,6 +26,13 @@ public sealed class AppSettings
     public bool LockPanels { get; set; }
 
     /// <summary>Pasa al siguiente ámbito del HUD (tipo de juego → todo el historial → esta mesa) y lo guarda.</summary>
+    public void SetScope(HudScope s)
+    {
+        if (HudScope == s) return;
+        HudScope = s;
+        Save();
+    }
+
     public void CycleScope()
     {
         HudScope = (HudScope)(((int)HudScope + 1) % 3);

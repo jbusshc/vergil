@@ -35,7 +35,6 @@ public static class Help
         var sb = new System.Text.StringBuilder(badge + (text.Length > 0 ? "\n" + text : ""));
         if (baseName != name) sb.Append("\n\n").Append(For("Etiqueta con número (p. ej. TAG 2)"));
         if (unsure) sb.Append("\n\n").Append(For("Etiqueta con «?» (p. ej. LAG?)"));
-        sb.Append("\n\nTipo de juego: se calcula con manos del mismo tipo de juego que esta mesa.");
         return sb.ToString();
     }
 
@@ -162,7 +161,7 @@ public static class Help
         Add("Ajustes", "Reentrenar arquetipos", "Vuelve a agrupar a tus rivales por estilo con los datos actuales.");
 
         // ---------- Tipos de jugador (la etiqueta junto al nombre en el HUD y la columna Perfil) ----------
-        Add("Tipos de jugador", "Qué es la etiqueta", "La etiqueta junto al nombre resume cómo ha jugado ese rival en este tipo de juego, mirando sobre todo VPIP (cuántas manos juega), PFR (cuántas sube) y su agresividad. Es una descripción de lo que ha hecho, no una predicción ni un consejo. Se calcula solo con manos del mismo tipo de juego y del mismo tipo de dinero. Deja el cursor sobre una etiqueta concreta para ver qué significa; la lista completa está en esta sección.", "Perfil", "Tipo de jugador");
+        Add("Tipos de jugador", "Qué es la etiqueta", "La etiqueta junto al nombre resume cómo ha jugado ese rival en este tipo de juego, mirando sobre todo VPIP (cuántas manos juega), PFR (cuántas sube) y su agresividad. Es una descripción de lo que ha hecho, no una predicción ni un consejo.", "Perfil", "Tipo de jugador");
         Add("Tipos de jugador", "?", "Todavía sin etiqueta: hay menos de 15 manos de este jugador en este tipo de juego.");
         Add("Tipos de jugador", "Etiqueta con «?» (p. ej. LAG?)", "El sistema duda: el jugador está a medio camino entre dos estilos, o la muestra es corta. Tómala como una pista, no como un hecho.", "LAG?", "TAG?", "Nit?", "Fish?", "Pasivo?", "Regular?", "Tight?", "Maníaco?");
         Add("Tipos de jugador", "Etiqueta con número (p. ej. TAG 2)", "Hay varios grupos de rivales con el mismo nombre; el número solo los distingue (el 1 es el más numeroso). Los datos de cada grupo están en Población › Arquetipos.", "TAG 1", "TAG 2", "TAG 3", "LAG 1", "LAG 2", "Nit 1", "Nit 2", "Fish 1", "Fish 2", "Regular 1", "Regular 2", "Tight 1", "Tight 2");
@@ -187,7 +186,7 @@ public static class Help
         Add("Qué manos cuentan", "Todo el historial", "Cuentan todas las manos de dinero real, sea cual sea el tipo de juego. Sirve para ver cómo juega una persona en general, pero mezcla dinámicas muy distintas.", "Todo el dinero real", "Todo", "Todos", "Todo (ficticio)");
         Add("Qué manos cuentan", "Esta mesa", "Solo cuentan las manos jugadas en esta mesa (o en este torneo). Útil para ver cómo juega alguien hoy, y cómo estás jugando tú en esta mesa.", "Este torneo", "Solo esta mesa", "Solo este torneo");
         Add("Qué manos cuentan", "Dinero ficticio", "Las manos con fichas de práctica se guardan aparte: nunca se mezclan con las de dinero real en estadísticas, informes ni bankroll. Las mesas de práctica enseñan solo datos de práctica.", "(ficticio)");
-        Add("Qué manos cuentan", "Cambiar el ámbito del HUD", "El botón redondo de la esquina de cada mesa («HUD · … ⟳») o Ctrl+Alt+G cambia entre Mismo tipo de juego → Todo el historial → Esta mesa. Afecta a todos los paneles, incluido el tuyo, y a la ficha que se abre al hacer clic en un jugador (donde puedes cambiarlo de nuevo).", "HUD · ⟳");
+        Add("Qué manos cuentan", "Cambiar el ámbito del HUD", "El botón flotante de cada mesa (se arrastra como los paneles) o Ctrl+Alt+G cambia entre Mismo tipo de juego → Todo el historial → Esta mesa. Afecta a todos los paneles, incluido el tuyo, y a la ficha de cada jugador.", "HUD · ⟳");
         Add("Qué manos cuentan", "Cash", "Mesas de cash (no Zoom) en cualquier límite.");
         Add("Qué manos cuentan", "Spin & Go", "Torneos de 3 jugadores con premio aleatorio (la ruleta). Muy poca profundidad de stack y mucho heads-up.");
         Add("Qué manos cuentan", "Torneos MTT/SNG", "Torneos multimesa y Sit & Go de varios jugadores. El valor de las fichas cambia con el ICM y los niveles.", "MTT / SNG", "Torneos MTT / SNG");

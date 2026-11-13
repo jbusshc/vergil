@@ -37,8 +37,7 @@ public static class PlayerPopup
         {
             Foreground = White, Background = Brush(48, 48, 58), BorderBrush = Brush(90, 90, 100), Padding = new Thickness(8, 2, 8, 2),
             Margin = new Thickness(10, 0, 10, 0), Cursor = System.Windows.Input.Cursors.Hand, HorizontalAlignment = HorizontalAlignment.Left,
-            ToolTip = "Qué manos cuentan en las estadísticas de esta ficha. Clic para pasar al siguiente ámbito.\n" +
-                      "El dinero real y el ficticio nunca se mezclan; los tipos de juego (cash, Spin & Go, torneos) tienen dinámicas distintas.",
+            Visibility = ctx != null ? Visibility.Collapsed : Visibility.Visible,   // en una mesa manda el botón flotante del HUD
         };
         var host = new ContentControl();
         int tab = Math.Clamp(initialTab, 0, 4);
