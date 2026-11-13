@@ -272,7 +272,7 @@ public class IcmTests
     }
 
     const string AllInHand =
-        "PokerStars Hand #300000001: Tournament #910001, 9000+1000 Hold'em No Limit - Level I (50/100) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]\n" +
+        "PokerStars Hand #300000001: Tournament #910001, $9000+$1000 USD Hold'em No Limit - Level I (50/100) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]\n" +
         "Table '910001 1' 6-max Seat #3 is the button\n" +
         "Seat 1: Villain1 (1000 in chips)\nSeat 2: Villain2 (3000 in chips)\nSeat 3: Hero (2000 in chips)\n" +
         "Villain1: posts small blind 50\nVillain2: posts big blind 100\n*** HOLE CARDS ***\nDealt to Hero [Ah Ad]\n" +

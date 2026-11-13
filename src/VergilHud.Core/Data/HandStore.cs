@@ -7,17 +7,23 @@ namespace VergilHud.Core;
 /// <summary>Esquema v2 y escritura de manos + hechos. Compartido por HudDatabase y las migraciones.</summary>
 internal static class HandStore
 {
-    public static string FactsTableSql()
+    public const string PlayTable = "play_hand_facts";
+
+    /// <summary>Tabla donde van los hechos de una mano: dinero real o ficticio (que nunca se mezclan).</summary>
+    public static string TableFor(Hand h) => h.IsPlayMoney ? PlayTable : "player_hand_facts";
+
+    public static string FactsTableSql(string table = "player_hand_facts")
     {
+        string suffix = table == "player_hand_facts" ? "facts" : "play";
         var cols = string.Join(", ", FactCatalog.Columns.Select(c => c.Kind switch
         {
             FactKind.Int => $"{c.Name} INTEGER NOT NULL DEFAULT 0",
             FactKind.Real => $"{c.Name} REAL",
             _ => $"{c.Name} TEXT",
         }));
-        return $"CREATE TABLE player_hand_facts(hand_id TEXT NOT NULL, player TEXT NOT NULL, seat INTEGER NOT NULL, {cols}, PRIMARY KEY(hand_id, player));" +
-               "CREATE INDEX ix_facts_player_time ON player_hand_facts(player, played_at);" +
-               "CREATE INDEX ix_facts_player_pos ON player_hand_facts(player, position);";
+        return $"CREATE TABLE {table}(hand_id TEXT NOT NULL, player TEXT NOT NULL, seat INTEGER NOT NULL, {cols}, PRIMARY KEY(hand_id, player));" +
+               $"CREATE INDEX ix_{suffix}_player_time ON {table}(player, played_at);" +
+               $"CREATE INDEX ix_{suffix}_player_pos ON {table}(player, position);";
     }
 
     public const string OtherTablesSql = @"
@@ -25,7 +31,7 @@ CREATE TABLE hands(
   hand_id TEXT PRIMARY KEY, site TEXT, table_name TEXT, game TEXT, format TEXT, tournament_id TEXT NULL,
   buyin REAL NULL, level INTEGER, played_at TEXT, small_blind REAL, big_blind REAL, ante REAL,
   max_seats INTEGER, players_dealt INTEGER, hero TEXT NULL, hero_cards TEXT NULL, board TEXT,
-  pot REAL, rake REAL, session_id INTEGER NULL, raw TEXT);
+  pot REAL, rake REAL, session_id INTEGER NULL, raw TEXT, play_money INTEGER NOT NULL DEFAULT 0);
 CREATE INDEX ix_hands_played_at ON hands(played_at);
 CREATE INDEX ix_hands_tournament ON hands(tournament_id);
 CREATE TABLE players(player TEXT PRIMARY KEY, first_seen TEXT, last_seen TEXT, hands INTEGER, color_label TEXT NULL, note TEXT NULL);
@@ -112,9 +118,9 @@ ON CONFLICT(id) DO UPDATE SET
     {
         using var hc = c.CreateCommand();
         hc.Transaction = tx;
-        hc.CommandText = @"INSERT OR IGNORE INTO hands(hand_id,site,table_name,game,format,tournament_id,buyin,level,played_at,small_blind,big_blind,ante,max_seats,players_dealt,hero,hero_cards,board,pot,rake,raw)
-VALUES($id,$site,$tbl,$game,$fmt,$tid,$buyin,$level,$at,$sb,$bb,$ante,$max,$pd,$hero,$cards,$board,$pot,$rake,$raw)";
-        var hp = new[] { "$id", "$site", "$tbl", "$game", "$fmt", "$tid", "$buyin", "$level", "$at", "$sb", "$bb", "$ante", "$max", "$pd", "$hero", "$cards", "$board", "$pot", "$rake", "$raw" }
+        hc.CommandText = @"INSERT OR IGNORE INTO hands(hand_id,site,table_name,game,format,tournament_id,buyin,level,played_at,small_blind,big_blind,ante,max_seats,players_dealt,hero,hero_cards,board,pot,rake,raw,play_money)
+VALUES($id,$site,$tbl,$game,$fmt,$tid,$buyin,$level,$at,$sb,$bb,$ante,$max,$pd,$hero,$cards,$board,$pot,$rake,$raw,$pm)";
+        var hp = new[] { "$id", "$site", "$tbl", "$game", "$fmt", "$tid", "$buyin", "$level", "$at", "$sb", "$bb", "$ante", "$max", "$pd", "$hero", "$cards", "$board", "$pot", "$rake", "$raw", "$pm" }
             .Select(n => hc.Parameters.AddWithValue(n, DBNull.Value)).ToArray();
         hc.Prepare();
 
@@ -124,13 +130,13 @@ VALUES($id,$site,$tbl,$game,$fmt,$tid,$buyin,$level,$at,$sb,$bb,$ante,$max,$pd,$
             {
                 h.Id, h.Site, h.TableName, h.Game, h.Format, h.TournamentId, h.Buyin is { } b ? (double)b : null, h.Level,
                 h.Time.ToString("s"), (double)h.SmallBlind, (double)h.BigBlind, (double)h.Ante, h.MaxSeats, facts.Count,
-                h.Hero, h.HeroCards, string.Join(" ", h.Board), (double)h.Pot, (double)h.Rake, h.Raw,
+                h.Hero, h.HeroCards, string.Join(" ", h.Board), (double)h.Pot, (double)h.Rake, h.Raw, h.IsPlayMoney ? 1 : 0,
             };
             for (int i = 0; i < hp.Length; i++) hp[i].Value = hv[i] ?? DBNull.Value;
             if (hc.ExecuteNonQuery() == 0) continue;
-            if (upsertTournaments) UpsertTournament(c, tx, h);
+            if (upsertTournaments && !h.IsPlayMoney) UpsertTournament(c, tx, h);
 
-            foreach (var f in facts) cache.Insert(c, tx, h.Id, f);
+            foreach (var f in facts) cache.Insert(c, tx, TableFor(h), h.Id, f);
             inserted.Add(h);
         }
     }
@@ -156,7 +162,7 @@ internal sealed class FactInsertCache
     readonly Dictionary<string, Entry> _entries = new();
     readonly int[] _idx = new int[FactCatalog.Count];
 
-    public void Insert(SqliteConnection c, SqliteTransaction tx, string handId, PlayerHandFacts f)
+    public void Insert(SqliteConnection c, SqliteTransaction tx, string table, string handId, PlayerHandFacts f)
     {
         var cols = FactCatalog.Columns;
         int n = 0;
@@ -174,12 +180,12 @@ internal sealed class FactInsertCache
 
         var key = new StringBuilder(n * 3);
         for (int k = 0; k < n; k++) key.Append(_idx[k]).Append(',');
-        var ks = key.ToString();
+        var ks = table + "|" + key;
 
         if (!_entries.TryGetValue(ks, out var e))
         {
             if (_entries.Count >= MaxEntries) Clear();
-            var names = new StringBuilder("INSERT OR IGNORE INTO player_hand_facts(hand_id,player,seat", 400);
+            var names = new StringBuilder("INSERT OR IGNORE INTO " + table + "(hand_id,player,seat", 400);
             var values = new StringBuilder("$h,$p,$s", 200);
             for (int k = 0; k < n; k++) { names.Append(',').Append(cols[_idx[k]].Name); values.Append(",$v").Append(k); }
             var cmd = c.CreateCommand();

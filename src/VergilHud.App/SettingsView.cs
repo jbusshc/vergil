@@ -154,7 +154,7 @@ public sealed class SettingsView : ViewBase
         row3.Children.Add(Ui.Combo(new[] { "Español", "English" }, s.Language == "en" ? 1 : 0, i => { if (!_loading) { s.Language = i == 1 ? "en" : "es"; s.Save(); toolMsg.Text = Loc.T("Se aplica al reiniciar la aplicación."); } }, 110));
         row3.Children.Add(Ui.Label("Tema", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
         row3.Children.Add(Ui.Combo(new[] { "Oscuro", "Claro" }, s.Theme == "light" ? 1 : 0, i => { if (!_loading) { s.Theme = i == 1 ? "light" : "dark"; s.Save(); toolMsg.Text = Loc.T("Se aplica al reiniciar la aplicación."); } }, 110));
-        row3.Children.Add(Ui.Check("Atajos Ctrl+Alt+H (ocultar paneles) y Ctrl+Alt+L (fijar paneles)", s.Hotkeys, v => { s.Hotkeys = v; s.Save(); toolMsg.Text = Loc.T("Se aplica al reiniciar la aplicación."); }));
+        row3.Children.Add(Ui.Check("Atajos Ctrl+Alt+H (ocultar paneles), Ctrl+Alt+L (fijar paneles) y Ctrl+Alt+G (cambiar qué manos alimentan el HUD)", s.Hotkeys, v => { s.Hotkeys = v; s.Save(); toolMsg.Text = Loc.T("Se aplica al reiniciar la aplicación."); }));
         row3.Children.Add(Ui.Check("Mostrar el tilt en la barra de estado", s.ShowTilt, v => { s.ShowTilt = v; s.Save(); }));
         tools.Children.Add(row3);
         tools.Children.Add(toolMsg);

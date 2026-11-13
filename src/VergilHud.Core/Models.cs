@@ -35,6 +35,8 @@ public sealed class Hand
     /// <summary>cash | mtt | spin | zoom. SNG y MTT no se distinguen solo con la mano: se afina con el summary (Fase 4).</summary>
     public string Format { get; set; } = "cash";
     public string? TournamentId { get; set; }
+    /// <summary>Mano de dinero ficticio (fichas de práctica): la cabecera no lleva moneda. Sus estadísticas se guardan aparte.</summary>
+    public bool IsPlayMoney { get; set; }
     public decimal? Buyin { get; set; }
     public int Level { get; set; }
     public decimal Ante { get; set; }

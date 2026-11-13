@@ -1,4 +1,4 @@
-PokerStars Hand #200000004: Tournament #900004, 9000+1000 Hold'em No Limit - Level III (30/60) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+PokerStars Hand #200000004: Tournament #900004, $9000+$1000 USD Hold'em No Limit - Level III (30/60) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
 Table '900004 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (300 in chips)
 Seat 3: Hero (1200 in chips)

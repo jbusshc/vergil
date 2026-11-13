@@ -162,7 +162,7 @@ public class NashDeviationTests
 {
     static string HuHand(int id, string cards, bool hero_shoves, DateTime t)
     {
-        var s = $"PokerStars Hand #{id}: Tournament #77{id}, 9000+1000 Hold'em No Limit - Level I (20/40) - {t:yyyy/MM/dd HH:mm:ss} CET [2026/03/01 14:00:00 ET]\n" +
+        var s = $"PokerStars Hand #{id}: Tournament #77{id}, $9000+$1000 USD Hold'em No Limit - Level I (20/40) - {t:yyyy/MM/dd HH:mm:ss} CET [2026/03/01 14:00:00 ET]\n" +
                 $"Table '77{id} 1' 2-max Seat #1 is the button\nSeat 1: Hero (320 in chips)\nSeat 2: Villain (320 in chips)\n" +
                 $"Hero: posts small blind 20\nVillain: posts big blind 40\n*** HOLE CARDS ***\nDealt to Hero [{cards}]\n";
         s += hero_shoves

@@ -111,12 +111,20 @@ public sealed class HudDatabase : IDisposable
         }
     }
 
-    public List<PlayerStats> GetAllPlayerStats(string? filter = null, int minHands = 1, int limit = 2000)
+    public List<PlayerStats> GetAllPlayerStats(string? filter = null, int minHands = 1, int limit = 2000, IReadOnlyList<string>? formats = null, bool playMoney = false)
     {
         lock (_lock)
         {
             using var cmd = _conn.CreateCommand();
-            cmd.CommandText = LegacySelect + " WHERE player LIKE $f GROUP BY player HAVING COUNT(*) >= $m ORDER BY COUNT(*) DESC LIMIT $l";
+            string fmt = "";
+            if (formats is { Count: > 0 })
+            {
+                for (int i = 0; i < formats.Count; i++) cmd.Parameters.AddWithValue("$fm" + i, formats[i]);
+                fmt = $" AND format IN ({string.Join(",", formats.Select((_, i) => "$fm" + i))})";
+            }
+            // El dinero ficticio vive en otra tabla: nunca se mezcla con el real
+            cmd.CommandText = LegacySelect.Replace("FROM player_hand_facts", playMoney ? "FROM play_hand_facts" : "FROM player_hand_facts") +
+                              " WHERE player LIKE $f" + fmt + " GROUP BY player HAVING COUNT(*) >= $m ORDER BY COUNT(*) DESC LIMIT $l";
             cmd.Parameters.AddWithValue("$f", "%" + (filter ?? "") + "%");
             cmd.Parameters.AddWithValue("$m", minHands);
             cmd.Parameters.AddWithValue("$l", limit);

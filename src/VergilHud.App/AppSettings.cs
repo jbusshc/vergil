@@ -19,8 +19,18 @@ public sealed class AppSettings
     public double PanelOpacity { get; set; } = 0.85;
     /// <summary>true = valor posterior bayesiano con barra de fiabilidad; false = x/n crudo como los HUD clásicos.</summary>
     public bool HonestMode { get; set; } = true;
+    /// <summary>Qué manos alimentan el HUD: Format (mismo tipo de juego), Global (todo el historial) o Table (solo esta mesa).</summary>
+    [System.Text.Json.Serialization.JsonConverter(typeof(System.Text.Json.Serialization.JsonStringEnumConverter))]
+    public HudScope HudScope { get; set; } = HudScope.Format;
     /// <summary>Bloquea el arrastre de los paneles.</summary>
     public bool LockPanels { get; set; }
+
+    /// <summary>Pasa al siguiente ámbito del HUD (tipo de juego → todo el historial → esta mesa) y lo guarda.</summary>
+    public void CycleScope()
+    {
+        HudScope = (HudScope)(((int)HudScope + 1) % 3);
+        Save();
+    }
     public bool FirstRunDone { get; set; }
     /// <summary>es | en. Se aplica al reiniciar.</summary>
     public string Language { get; set; } = "es";

@@ -1,4 +1,4 @@
-PokerStars Hand #200000006: Tournament #900006, 1000+100 Hold'em No Limit - Level V (20/40) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
+PokerStars Hand #200000006: Tournament #900006, $1000+$100 USD Hold'em No Limit - Level V (20/40) - 2026/03/01 20:00:00 CET [2026/03/01 14:00:00 ET]
 Table '900006 1' 9-max Seat #4 is the button
 Seat 1: Villain1 (150 in chips)
 Seat 2: Villain2 (450 in chips)

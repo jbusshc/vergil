@@ -21,9 +21,17 @@ public sealed record StatFilter
     public string? VsPlayer { get; init; }
     /// <summary>Solo manos en las que el jugador empezó con este cubo de stack (&lt;10, 10-20, 20-40, 40+).</summary>
     public string? StackBucket { get; init; }
+    /// <summary>Consulta el dinero ficticio en lugar del real (nunca se mezclan).</summary>
+    public bool PlayMoney { get; init; }
+    /// <summary>Solo manos de esta mesa (cash: mismo nombre de mesa).</summary>
+    public string? TableName { get; init; }
+    /// <summary>Solo manos de este torneo.</summary>
+    public string? TournamentId { get; init; }
+
+    public string FactsTable => PlayMoney ? "play_hand_facts" : "player_hand_facts";
 
     public string Key => string.Join("|", Format, Formats is null ? null : string.Join(",", Formats), MinBigBlind, MaxBigBlind, MinPlayers,
-        MaxPlayers, Positions is null ? null : string.Join(",", Positions), From?.ToString("s"), To?.ToString("s"), LastHands, VsPlayer, StackBucket);
+        MaxPlayers, Positions is null ? null : string.Join(",", Positions), From?.ToString("s"), To?.ToString("s"), LastHands, VsPlayer, StackBucket, PlayMoney, TableName, TournamentId);
 }
 
 /// <summary>
@@ -198,9 +206,15 @@ public sealed class StatEngine
                 for (int i = 0; i < f.Positions.Count; i++) { ps.Add("$f_pos" + i); cmd.Parameters.AddWithValue("$f_pos" + i, f.Positions[i]); }
                 where.Add($"position IN ({string.Join(",", ps)})");
             }
+            if (f.TableName != null)
+            {
+                where.Add("hand_id IN (SELECT hand_id FROM hands WHERE table_name = $f_tbl)");
+                cmd.Parameters.AddWithValue("$f_tbl", f.TableName);
+            }
+            if (f.TournamentId != null) { where.Add("tournament_id = $f_tid"); cmd.Parameters.AddWithValue("$f_tid", f.TournamentId); }
             if (f.VsPlayer != null)
             {
-                where.Add("hand_id IN (SELECT hand_id FROM player_hand_facts WHERE player = $f_vs)");
+                where.Add($"hand_id IN (SELECT hand_id FROM {f.FactsTable} WHERE player = $f_vs)");
                 cmd.Parameters.AddWithValue("$f_vs", f.VsPlayer);
             }
         }
@@ -209,13 +223,13 @@ public sealed class StatEngine
         if (f?.LastHands is { } n)
         {
             sql = $"WITH r AS (SELECT *, ROW_NUMBER() OVER (PARTITION BY player ORDER BY played_at DESC, hand_id DESC) AS rn " +
-                  $"FROM player_hand_facts WHERE {string.Join(" AND ", where)}) " +
+                  $"FROM {f.FactsTable} WHERE {string.Join(" AND ", where)}) " +
                   $"SELECT player, {string.Join(", ", sel)} FROM r WHERE rn <= $f_last GROUP BY player";
             cmd.Parameters.AddWithValue("$f_last", n);
         }
         else
         {
-            sql = $"SELECT player, {string.Join(", ", sel)} FROM player_hand_facts WHERE {string.Join(" AND ", where)} GROUP BY player";
+            sql = $"SELECT player, {string.Join(", ", sel)} FROM {f?.FactsTable ?? "player_hand_facts"} WHERE {string.Join(" AND ", where)} GROUP BY player";
         }
         cmd.CommandText = sql;
 

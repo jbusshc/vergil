@@ -10,8 +10,8 @@ public sealed class LeaksView : GatedView
 {
     public override string Title => "Leaks";
 
-    static readonly string[] ScopeNames = { "Cash", "Todos", "Spin & Go" };
-    static readonly string[][] ScopeFormats = { new[] { "cash", "zoom" }, Array.Empty<string>(), new[] { "spin" } };
+    static readonly string[] ScopeNames = { "Cash", "Spin & Go", "Torneos MTT/SNG", "Todos" };
+    static readonly string[][] ScopeFormats = { new[] { "cash" }, new[] { "spin" }, new[] { "mtt", "sng" }, Array.Empty<string>() };
 
     readonly StackPanel _list = new();
     readonly TextBlock _info = Ui.Label("", 12, false, Theme.Muted, new Thickness(0, 0, 0, 10));
@@ -24,7 +24,8 @@ public sealed class LeaksView : GatedView
     {
         var bar = new WrapPanel { Margin = new Thickness(0, 0, 0, 8) };
         bar.Children.Add(Ui.Label("Formato", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
-        bar.Children.Add(Ui.Combo(ScopeNames, 0, i => { _scope = i; Load(); }, 110));
+        _scope = Math.Max(0, Array.IndexOf(new[] { "cash", "spin", "mtt" }, FilterBar.PreferredScope));
+        bar.Children.Add(Ui.Combo(ScopeNames, _scope, i => { _scope = i; Load(); }, 130));
         bar.Children.Add(Ui.Btn("Recalcular", (_, _) => Load()));
         var root = new DockPanel();
         var top = new StackPanel();

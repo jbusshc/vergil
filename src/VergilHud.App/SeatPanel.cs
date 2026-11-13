@@ -51,7 +51,7 @@ public sealed class SeatPanel : Border
         header.Inlines.Add(new System.Windows.Documents.Run(Shorten(seat.Player, 14)) { Foreground = White });
         header.Inlines.Add(new System.Windows.Documents.Run($" {seat.Hands}") { Foreground = Grey, FontWeight = FontWeights.Normal });
         header.Inlines.Add(new System.Windows.Documents.Run($" {seat.Badge}")
-            { Foreground = BadgeBrush(seat.Badge), FontWeight = FontWeights.Normal, FontSize = 9 });
+            { Foreground = BadgeBrush(seat.Badge), FontWeight = FontWeights.Normal, FontSize = 9, ToolTip = Help.ForBadge(seat.Badge) });
         stack.Children.Add(header);
 
         foreach (var line in seat.Lines)

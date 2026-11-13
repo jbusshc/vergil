@@ -145,7 +145,7 @@ Board [Qd 5s 2h 9c 3d]
 
     // Mano real de un Spin (3-max) con un rival desconectado que sigue poniendo ciegas. Nicks sustituidos.
     const string SittingOutHand = """
-PokerStars Hand #262681563957: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:30 UTC [2026/11/11 19:17:30 ET]
+PokerStars Hand #262681563957: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:30 UTC [2026/11/11 19:17:30 ET]
 Table '4046679805 1' 3-max Seat #2 is the button
 Seat 1: Villain1 (280 in chips) is sitting out
 Seat 2: Villain2 (285 in chips)

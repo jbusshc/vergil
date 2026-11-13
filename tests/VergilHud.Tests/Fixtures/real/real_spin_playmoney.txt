@@ -1,4 +1,4 @@
-﻿PokerStars Hand #262681523255: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:13:10 UTC [2026/11/11 19:13:10 ET]
+﻿PokerStars Hand #262681523255: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:13:10 UTC [2026/11/11 19:13:10 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (500 in chips) 
 Seat 2: Villain2 (500 in chips) 
@@ -38,7 +38,7 @@ Seat 3: Hero (big blind) folded on the River
 
 
 
-PokerStars Hand #262681529572: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:13:51 UTC [2026/11/11 19:13:51 ET]
+PokerStars Hand #262681529572: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:13:51 UTC [2026/11/11 19:13:51 ET]
 Table '4046679805 1' 3-max Seat #2 is the button
 Seat 1: Villain1 (600 in chips) 
 Seat 2: Villain2 (480 in chips) 
@@ -75,7 +75,7 @@ Seat 3: Hero (small blind) collected (120)
 
 
 
-PokerStars Hand #262681534404: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:14:21 UTC [2026/11/11 19:14:21 ET]
+PokerStars Hand #262681534404: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:14:21 UTC [2026/11/11 19:14:21 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (560 in chips) 
 Seat 2: Villain2 (440 in chips) 
@@ -109,7 +109,7 @@ Seat 3: Hero (button) collected (60)
 
 
 
-PokerStars Hand #262681539157: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:14:51 UTC [2026/11/11 19:14:51 ET]
+PokerStars Hand #262681539157: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:14:51 UTC [2026/11/11 19:14:51 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (540 in chips) 
 Seat 2: Villain2 (420 in chips) 
@@ -145,7 +145,7 @@ Seat 3: Hero (big blind) folded before Flop
 
 
 
-PokerStars Hand #262681543729: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:15:19 UTC [2026/11/11 19:15:19 ET]
+PokerStars Hand #262681543729: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:15:19 UTC [2026/11/11 19:15:19 ET]
 Table '4046679805 1' 3-max Seat #2 is the button
 Seat 1: Villain1 (550 in chips) 
 Seat 2: Villain2 (430 in chips) 
@@ -174,7 +174,7 @@ Seat 3: Hero (small blind) collected (120)
 
 
 
-PokerStars Hand #262681546483: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:15:38 UTC [2026/11/11 19:15:38 ET]
+PokerStars Hand #262681546483: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:15:38 UTC [2026/11/11 19:15:38 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (510 in chips) 
 Seat 2: Villain2 (390 in chips) 
@@ -207,7 +207,7 @@ Seat 3: Hero (button) folded on the River
 
 
 
-PokerStars Hand #262681550000: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/11/12 0:16:02 UTC [2026/11/11 19:16:02 ET]
+PokerStars Hand #262681550000: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level I (10/20) - 2026/11/12 0:16:02 UTC [2026/11/11 19:16:02 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (670 in chips) 
 Seat 2: Villain2 (370 in chips) 
@@ -241,7 +241,7 @@ Seat 3: Hero (big blind) showed [9s 2d] and lost with a pair of Fours
 
 
 
-PokerStars Hand #262681553943: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:16:27 UTC [2026/11/11 19:16:27 ET]
+PokerStars Hand #262681553943: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:16:27 UTC [2026/11/11 19:16:27 ET]
 Table '4046679805 1' 3-max Seat #2 is the button
 Seat 1: Villain1 (740 in chips) 
 Seat 2: Villain2 (360 in chips) 
@@ -264,7 +264,7 @@ Seat 3: Hero (small blind) collected (60)
 
 
 
-PokerStars Hand #262681555184: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:16:35 UTC [2026/11/11 19:16:35 ET]
+PokerStars Hand #262681555184: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:16:35 UTC [2026/11/11 19:16:35 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (710 in chips) 
 Seat 2: Villain2 (360 in chips) 
@@ -302,7 +302,7 @@ Seat 3: Hero (button) showed [9c Kd] and won (920) with a straight, Nine to King
 
 
 
-PokerStars Hand #262681561336: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:14 UTC [2026/11/11 19:17:14 ET]
+PokerStars Hand #262681561336: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:14 UTC [2026/11/11 19:17:14 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (280 in chips) 
 Seat 2: Villain2 (300 in chips) 
@@ -326,7 +326,7 @@ Seat 3: Hero (big blind) collected (30)
 
 
 
-PokerStars Hand #262681563957: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:30 UTC [2026/11/11 19:17:30 ET]
+PokerStars Hand #262681563957: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:30 UTC [2026/11/11 19:17:30 ET]
 Table '4046679805 1' 3-max Seat #2 is the button
 Seat 1: Villain1 (280 in chips) is sitting out
 Seat 2: Villain2 (285 in chips) 
@@ -349,7 +349,7 @@ Seat 3: Hero (small blind) collected (60)
 
 
 
-PokerStars Hand #262681565222: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:38 UTC [2026/11/11 19:17:38 ET]
+PokerStars Hand #262681565222: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:38 UTC [2026/11/11 19:17:38 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (250 in chips) is sitting out
 Seat 2: Villain2 (285 in chips) 
@@ -372,7 +372,7 @@ Seat 3: Hero (button) collected (75)
 
 
 
-PokerStars Hand #262681566027: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:43 UTC [2026/11/11 19:17:43 ET]
+PokerStars Hand #262681566027: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:43 UTC [2026/11/11 19:17:43 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (235 in chips) is sitting out
 Seat 2: Villain2 (255 in chips) 
@@ -394,7 +394,7 @@ Seat 3: Hero (big blind) folded before Flop
 
 
 
-PokerStars Hand #262681567151: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:50 UTC [2026/11/11 19:17:50 ET]
+PokerStars Hand #262681567151: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:50 UTC [2026/11/11 19:17:50 ET]
 Table '4046679805 1' 3-max Seat #2 is the button
 Seat 1: Villain1 (235 in chips) is sitting out
 Seat 2: Villain2 (285 in chips) 
@@ -417,7 +417,7 @@ Seat 3: Hero (small blind) collected (60)
 
 
 
-PokerStars Hand #262681568091: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:56 UTC [2026/11/11 19:17:56 ET]
+PokerStars Hand #262681568091: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:17:56 UTC [2026/11/11 19:17:56 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (205 in chips) is sitting out
 Seat 2: Villain2 (285 in chips) 
@@ -443,7 +443,7 @@ Seat 3: Hero (button) folded on the Flop
 
 
 
-PokerStars Hand #262681569860: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:07 UTC [2026/11/11 19:18:07 ET]
+PokerStars Hand #262681569860: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:07 UTC [2026/11/11 19:18:07 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (190 in chips) is sitting out
 Seat 2: Villain2 (360 in chips) 
@@ -472,7 +472,7 @@ Seat 3: Hero (big blind) showed [8s 8c] and won (720) with a full house, Eights 
 
 
 
-PokerStars Hand #262681572614: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:24 UTC [2026/11/11 19:18:24 ET]
+PokerStars Hand #262681572614: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:24 UTC [2026/11/11 19:18:24 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (190 in chips) is sitting out
 Seat 3: Hero (1310 in chips) 
@@ -492,7 +492,7 @@ Seat 3: Hero (button) (small blind) collected (60)
 
 
 
-PokerStars Hand #262681573305: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:29 UTC [2026/11/11 19:18:29 ET]
+PokerStars Hand #262681573305: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:29 UTC [2026/11/11 19:18:29 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (160 in chips) is sitting out
 Seat 3: Hero (1340 in chips) 
@@ -511,7 +511,7 @@ Seat 3: Hero (big blind) collected (30)
 
 
 
-PokerStars Hand #262681573585: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:31 UTC [2026/11/11 19:18:31 ET]
+PokerStars Hand #262681573585: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:31 UTC [2026/11/11 19:18:31 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (145 in chips) is sitting out
 Seat 3: Hero (1355 in chips) 
@@ -531,7 +531,7 @@ Seat 3: Hero (button) (small blind) collected (60)
 
 
 
-PokerStars Hand #262681574464: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:36 UTC [2026/11/11 19:18:36 ET]
+PokerStars Hand #262681574464: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:36 UTC [2026/11/11 19:18:36 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (115 in chips) is sitting out
 Seat 3: Hero (1385 in chips) 
@@ -550,7 +550,7 @@ Seat 3: Hero (big blind) collected (30)
 
 
 
-PokerStars Hand #262681574739: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:38 UTC [2026/11/11 19:18:38 ET]
+PokerStars Hand #262681574739: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:38 UTC [2026/11/11 19:18:38 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (100 in chips) is sitting out
 Seat 3: Hero (1400 in chips) 
@@ -570,7 +570,7 @@ Seat 3: Hero (button) (small blind) collected (60)
 
 
 
-PokerStars Hand #262681575568: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:44 UTC [2026/11/11 19:18:44 ET]
+PokerStars Hand #262681575568: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:44 UTC [2026/11/11 19:18:44 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (70 in chips) is sitting out
 Seat 3: Hero (1430 in chips) 
@@ -589,7 +589,7 @@ Seat 3: Hero (big blind) collected (30)
 
 
 
-PokerStars Hand #262681575826: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:45 UTC [2026/11/11 19:18:45 ET]
+PokerStars Hand #262681575826: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:45 UTC [2026/11/11 19:18:45 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (55 in chips) is sitting out
 Seat 3: Hero (1445 in chips) 
@@ -609,7 +609,7 @@ Seat 3: Hero (button) (small blind) collected (60)
 
 
 
-PokerStars Hand #262681576675: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:51 UTC [2026/11/11 19:18:51 ET]
+PokerStars Hand #262681576675: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:51 UTC [2026/11/11 19:18:51 ET]
 Table '4046679805 1' 3-max Seat #1 is the button
 Seat 1: Villain1 (25 in chips) is sitting out
 Seat 3: Hero (1475 in chips) 
@@ -628,7 +628,7 @@ Seat 3: Hero (big blind) collected (30)
 
 
 
-PokerStars Hand #262681576966: Tournament #4046679805, 9000+1000 Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:53 UTC [2026/11/11 19:18:53 ET]
+PokerStars Hand #262681576966: Tournament #4046679805, $9000+$1000 USD Hold'em No Limit - Level II (15/30) - 2026/11/12 0:18:53 UTC [2026/11/11 19:18:53 ET]
 Table '4046679805 1' 3-max Seat #3 is the button
 Seat 1: Villain1 (10 in chips) is sitting out
 Seat 3: Hero (1490 in chips) 

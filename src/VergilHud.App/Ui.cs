@@ -155,13 +155,21 @@ public static class Ui
             if (fmt != null) binding.StringFormat = fmt;
             var colStyle = new Style(typeof(System.Windows.Controls.Primitives.DataGridColumnHeader), hs);
             if (Help.For(header) is { } tip) colStyle.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, tip));
-            g.Columns.Add(new DataGridTextColumn
+            var col = new DataGridTextColumn
             {
                 HeaderStyle = colStyle,
                 Header = header,
                 Binding = binding,
                 Width = width > 0 ? new DataGridLength(width) : new DataGridLength(1, DataGridLengthUnitType.Star),
-            });
+            };
+            if (header is "Perfil" or "Arquetipo")
+            {
+                // En estas columnas cada celda es una etiqueta de tipo de jugador: el cursor encima explica qué significa
+                var cs = new Style(typeof(TextBlock));
+                cs.Setters.Add(new Setter(FrameworkElement.ToolTipProperty, new Binding(path) { Converter = BadgeTipConverter.Instance }));
+                col.ElementStyle = cs;
+            }
+            g.Columns.Add(col);
         }
         return g;
     }
@@ -177,22 +185,33 @@ public static class Ui
     }
 }
 
+/// <summary>Convierte el texto de una celda de tipo de jugador (TAG, Fish 2…) en su explicación.</summary>
+sealed class BadgeTipConverter : System.Windows.Data.IValueConverter
+{
+    public static readonly BadgeTipConverter Instance = new();
+    public object? Convert(object? value, Type targetType, object? parameter, System.Globalization.CultureInfo culture) =>
+        value is string s && Help.ForBadge(s) is { Length: > 0 } t ? t : null;
+    public object ConvertBack(object? value, Type targetType, object? parameter, System.Globalization.CultureInfo culture) => throw new NotSupportedException();
+}
+
 /// <summary>Periodo y formato elegidos en la parte superior de cada vista de análisis.</summary>
 public sealed class FilterBar : StackPanel
 {
     public static readonly string[] PeriodNames = { "Hoy", "7 días", "30 días", "Este año", "Todo" };
-    public static readonly string[] ScopeNames = { "Cash", "Torneos", "Todo" };
-    public static readonly string[] ScopeKeys = { "cash", "tournament", "all" };
+    public static readonly string[] ScopeNames = { "Cash", "Spin & Go", "Torneos MTT/SNG", "Zoom", "Todo" };
+    public static readonly string[] ScopeKeys = { "cash", "spin", "mtt", "zoom", "all" };
+    /// <summary>Tipo de juego en el que más juega el héroe: es el que se abre por defecto (los formatos no se mezclan salvo que elijas "Todo").</summary>
+    public static string PreferredScope { get; set; } = "cash";
 
     public int PeriodIndex { get; private set; } = 4;
     public int ScopeIndex { get; private set; }
     public event Action? Changed;
 
-    public FilterBar(bool withScope = true, int defaultScope = 0)
+    public FilterBar(bool withScope = true, int defaultScope = -1)
     {
         Orientation = Orientation.Horizontal;
         Margin = new Thickness(0, 0, 0, 10);
-        ScopeIndex = defaultScope;
+        ScopeIndex = defaultScope >= 0 ? defaultScope : Math.Max(0, Array.IndexOf(ScopeKeys, PreferredScope));
         Children.Add(Ui.Label("Periodo", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
         Children.Add(Ui.Combo(PeriodNames, PeriodIndex, i => { PeriodIndex = i; Changed?.Invoke(); }, 110));
         if (withScope)

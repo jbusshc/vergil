@@ -77,7 +77,7 @@ Las expresiones solo pueden usar los hechos de `docs/FACTS.md`; cualquier otro n
 - `VergilHud.exe --selfcheck copia-de-hud.db informe.txt` ejecuta todos los análisis sobre una COPIA de tu base de datos y anota resultados y errores.
 
 ## Atajos y datos
-- Ctrl+Alt+H oculta/muestra los paneles de las mesas; Ctrl+Alt+L fija/suelta los paneles (se pueden desactivar en Ajustes).
+- Ctrl+Alt+H oculta/muestra los paneles de las mesas; Ctrl+Alt+L fija/suelta los paneles; Ctrl+Alt+G cambia qué manos alimentan el HUD (tipo de juego → todo el historial → esta mesa). Se pueden desactivar en Ajustes.
 - Datos en `%APPDATA%\VergilHud`: `hud.db`, `settings.json`, `hud-profiles.json`, `leak-baselines.json` (rangos objetivo editables), `custom-stats.json`,
   `backups\` (una copia al día, se guardan 5), `reports\` (informe semanal HTML) y `logs\` (14 días).
 - La app nunca abre una conexión de red (hay una prueba que lo vigila). Las actualizaciones son manuales.

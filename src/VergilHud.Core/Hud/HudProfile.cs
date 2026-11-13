@@ -50,6 +50,25 @@ public sealed class HudProfile
 
 public static class HudProfiles
 {
+    /// <summary>Formatos que se consideran "el mismo tipo de juego": sus dinámicas son parecidas y sus estadísticas se pueden juntar.</summary>
+    public static IReadOnlyList<string> FormatGroup(string? format) => format switch
+    {
+        "cash" => new[] { "cash" },
+        "zoom" => new[] { "zoom" },
+        "spin" => new[] { "spin" },
+        "mtt" or "sng" => new[] { "mtt", "sng" },
+        _ => Array.Empty<string>(),
+    };
+
+    public static string GroupName(string? format) => format switch
+    {
+        "cash" => "cash",
+        "zoom" => "Zoom",
+        "spin" => "Spin & Go",
+        "mtt" or "sng" => "torneos MTT/SNG",
+        _ => "todo",
+    };
+
     static HudStatRef R(string id, bool label = true, string sep = " ", bool stackAware = false, bool split = false) =>
         new() { Id = id, ShowLabel = label, Sep = sep, StackAware = stackAware, SizeSplit = split };
 

@@ -68,7 +68,8 @@ public sealed class Analytics
         var w = new List<string> { "is_hero = 1" };
         switch (scope)
         {
-            case "cash": w.Add("format IN ('cash','zoom')"); break;
+            case "cash": w.Add("format = 'cash'"); break;
+            case "zoom": w.Add("format = 'zoom'"); break;
             case "tournament": w.Add("format IN ('mtt','sng','spin')"); break;
             case "spin": w.Add("format = 'spin'"); break;
             case "mtt": w.Add("format IN ('mtt','sng')"); break;
@@ -85,6 +86,21 @@ public sealed class Analytics
     }
 
     // ---------- resumen ----------
+    /// <summary>El tipo de juego donde más manos tiene el héroe ("cash", "spin", "mtt" o "zoom"): es el que se abre por defecto.</summary>
+    public string PreferredScope()
+    {
+        var counts = _db.Query(conn =>
+        {
+            using var cmd = conn.CreateCommand();
+            cmd.CommandText = "SELECT format, COUNT(*) FROM player_hand_facts WHERE is_hero = 1 GROUP BY format";
+            using var r = cmd.ExecuteReader();
+            var d = new Dictionary<string, int>();
+            while (r.Read()) d[r.GetString(0) == "sng" ? "mtt" : r.GetString(0)] = d.GetValueOrDefault(r.GetString(0) == "sng" ? "mtt" : r.GetString(0)) + r.GetInt32(1);
+            return d;
+        });
+        return counts.Count == 0 ? "cash" : counts.OrderByDescending(kv => kv.Value).First().Key;
+    }
+
     public Overview GetOverview(Period period, string scope = "cash")
     {
         SessionService.EnsureUpToDate(_db);

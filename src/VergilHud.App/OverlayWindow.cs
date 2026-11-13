@@ -19,6 +19,7 @@ public sealed class OverlayWindow : Window
     public string TableName { get; }
     public string? LastHandId { get; set; }
     public HudProfile? Profile { get; private set; }
+    Hand? _hand;
 
     public OverlayWindow(IntPtr table, string tableName, AppServices svc)
     {
@@ -81,6 +82,7 @@ public sealed class OverlayWindow : Window
     public void SetHand(Hand hand)
     {
         LastHandId = hand.Id;
+        _hand = hand;
         foreach (var p in _panels) p.ClosePopup();
         _canvas.Children.Clear();
         _panels.Clear();
@@ -100,14 +102,48 @@ public sealed class OverlayWindow : Window
                 : (view.Seat - 1) % _maxSeats;
 
             var profile = Profile;
+            var ctx = HandContext.From(hand);
             var panel = new SeatPanel(view, visual, options, s.PanelOpacity, s.LockPanels,
-                () => PlayerPopup.Create(_svc, view.Player, profile));
+                () => PlayerPopup.Create(_svc, view.Player, profile, 0, false, ctx, _svc.Settings.HudScope));
             if (view.IsHero && s.ShowTilt && _svc.TiltText != null) panel.ToolTip += Environment.NewLine + _svc.TiltText;
             panel.DragFinished += OnPanelDragged;
             _panels.Add(panel);
             _canvas.Children.Add(panel);
         }
+        _canvas.Children.Add(ScopeChip(hand));
         LayoutPanels();
+    }
+
+    /// <summary>Botoncito de la esquina: qué manos alimentan el HUD. Clic = pasa al siguiente ámbito (también Ctrl+Alt+G).</summary>
+    UIElement ScopeChip(Hand hand)
+    {
+        string text = _svc.Settings.HudScope switch
+        {
+            HudScope.Global => hand.IsPlayMoney ? "Todo (ficticio)" : "Todo el historial",
+            HudScope.Table => hand.IsTournament ? "Este torneo" : "Esta mesa",
+            _ => HudProfiles.GroupName(hand.Format) + (hand.IsPlayMoney ? " (ficticio)" : ""),
+        };
+        var chip = new Border
+        {
+            Background = new SolidColorBrush(Color.FromArgb(200, 18, 18, 22)),
+            BorderBrush = new SolidColorBrush(Color.FromArgb(160, 90, 90, 100)),
+            BorderThickness = new Thickness(1),
+            CornerRadius = new CornerRadius(8),
+            Padding = new Thickness(6, 1, 6, 1),
+            Cursor = System.Windows.Input.Cursors.Hand,
+            HorizontalAlignment = HorizontalAlignment.Left,
+            VerticalAlignment = VerticalAlignment.Top,
+            Child = new TextBlock { Text = "HUD · " + text + " ⟳", Foreground = new SolidColorBrush(Color.FromRgb(200, 200, 210)), FontSize = 10 },
+            ToolTip = "Qué manos cuentan en las estadísticas de todos los paneles:\n" +
+                      "· Tipo de juego: solo manos del mismo formato (cash con cash, Spin & Go con Spin & Go, torneos con torneos).\n" +
+                      "· Todo el historial: todas las manos de dinero real, de cualquier formato.\n" +
+                      "· Esta mesa: solo lo que ha pasado en esta mesa o torneo.\n" +
+                      "El dinero ficticio nunca se mezcla con el real. Clic o Ctrl+Alt+G para cambiar.",
+        };
+        Canvas.SetLeft(chip, 4);
+        Canvas.SetTop(chip, 4);
+        chip.MouseLeftButtonUp += (_, e) => { _svc.Settings.CycleScope(); e.Handled = true; };
+        return chip;
     }
 
     string Key(int visual) => $"{_maxSeats}-{visual}";

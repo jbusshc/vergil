@@ -164,7 +164,7 @@ public sealed class AutoNoteService
             var rows = _db.Query(conn =>
             {
                 using var cmd = conn.CreateCommand();
-                cmd.CommandText = "SELECT hand_id, raw FROM hands WHERE hand_id > $last ORDER BY hand_id LIMIT 1000";
+                cmd.CommandText = "SELECT hand_id, raw FROM hands WHERE play_money = 0 AND hand_id > $last ORDER BY hand_id LIMIT 1000";
                 cmd.Parameters.AddWithValue("$last", lastId);
                 using var r = cmd.ExecuteReader();
                 var l = new List<(string, string)>();

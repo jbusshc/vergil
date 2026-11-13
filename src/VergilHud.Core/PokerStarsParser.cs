@@ -69,6 +69,7 @@ public static class PokerStarsParser
 
         var hand = new Hand { Id = hm.Groups[2].Value, Raw = text.Trim() };
         hand.IsTournament = header.Contains("Tournament #");
+        hand.IsPlayMoney = IsPlayMoneyHeader(header);
         if (TourneyRx.Match(header) is { Success: true } tr)
         {
             hand.TournamentId = tr.Groups[1].Value;
@@ -201,6 +202,11 @@ public static class PokerStarsParser
         hand.Format = fast ? "zoom" : hand.IsTournament ? (hand.MaxSeats == 3 ? "spin" : "mtt") : "cash";
         return hand;
     }
+
+    static readonly Regex RealMoneyRx = new(@"[$€£]|\b(?:USD|EUR|GBP|CAD|CHF|SEK|DKK|NOK|PLN|BRL|MXN|INR|CNY|JPY|RUB|ARS|COP|CLP|PEN|UAH|AUD|NZD|HKD|SGD|CZK|HUF|RON|BGN|TRY)\b|Freeroll", Opts | RegexOptions.IgnoreCase);
+
+    /// <summary>La cabecera de una mano de dinero real lleva moneda ($, €, USD…); la de dinero ficticio no. Un freeroll reparte premios reales.</summary>
+    public static bool IsPlayMoneyHeader(string header) => !RealMoneyRx.IsMatch(header);
 
     static int Roman(string s)
     {

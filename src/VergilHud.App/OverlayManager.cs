@@ -16,6 +16,7 @@ public sealed class OverlayManager
     public int OpenTables { get; private set; }
     /// <summary>Paneles ocultos con el atajo Ctrl+Alt+H (las mesas siguen igual).</summary>
     public bool Hidden { get; set; }
+    HudScope _lastScope;
 
     public OverlayManager(AppServices svc)
     {
@@ -67,6 +68,7 @@ public sealed class OverlayManager
         OpenTables = tableWindows.Count;
         _svc.Play.Update(OpenTables);
 
+        if (_svc.Settings.HudScope != _lastScope) { _lastScope = _svc.Settings.HudScope; InvalidateAll(); }
         var tables = _svc.Tracker.Snapshot();
         var seen = new HashSet<IntPtr>();
         foreach (var w in tableWindows)

@@ -9,8 +9,8 @@ public sealed class PopulationView : GatedView
 {
     public override string Title => "Población";
 
-    static readonly string[] ScopeNames = { "Cash", "Spin & Go", "MTT / SNG", "Todos" };
-    static readonly string[][] ScopeFormats = { new[] { "cash", "zoom" }, new[] { "spin" }, new[] { "mtt", "sng" }, Array.Empty<string>() };
+    static readonly string[] ScopeNames = { "Cash", "Spin & Go", "Torneos MTT/SNG", "Todos" };
+    static readonly string[][] ScopeFormats = { new[] { "cash" }, new[] { "spin" }, new[] { "mtt", "sng" }, Array.Empty<string>() };
     static readonly string[] Keys = { "cash", "spin", "mtt", "all" };
 
     readonly DataGrid _grid;
@@ -35,7 +35,8 @@ public sealed class PopulationView : GatedView
     {
         var bar = new WrapPanel { Margin = new Thickness(0, 0, 0, 8) };
         bar.Children.Add(Ui.Label("Formato", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
-        bar.Children.Add(Ui.Combo(ScopeNames, 0, i => { _scope = i; Load(); }, 120));
+        _scope = Math.Max(0, Array.IndexOf(new[] { "cash", "spin", "mtt" }, FilterBar.PreferredScope));
+        bar.Children.Add(Ui.Combo(ScopeNames, _scope, i => { _scope = i; Load(); }, 130));
         bar.Children.Add(Ui.Btn("Reentrenar arquetipos", (_, _) => Retrain()));
         var root = new DockPanel();
         var top = new StackPanel();

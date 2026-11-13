@@ -190,7 +190,7 @@ public class HeaderTests
     [InlineData("I", 1)] [InlineData("IV", 4)] [InlineData("IX", 9)] [InlineData("XII", 12)] [InlineData("XL", 40)]
     public void Roman_levels(string roman, int level)
     {
-        var text = $"PokerStars Hand #1: Tournament #5, 1000+100 Hold'em No Limit - Level {roman} (10/20) - 2026/03/01 20:00:00 CET [x]\n" +
+        var text = $"PokerStars Hand #1: Tournament #5, $1000+$100 USD Hold'em No Limit - Level {roman} (10/20) - 2026/03/01 20:00:00 CET [x]\n" +
                    "Table 'T' 6-max Seat #1 is the button\nSeat 1: A (500 in chips)\nA: posts big blind 20\n*** SUMMARY ***\nTotal pot 0 | Rake 0\n";
         Assert.Equal(level, PokerStarsParser.Parse(text)!.Level);
     }

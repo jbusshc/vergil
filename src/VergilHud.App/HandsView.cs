@@ -10,8 +10,8 @@ public sealed class HandsView : ViewBase
 {
     public override string Title => "Manos";
 
-    static readonly string[] ScopeNames = { "Todos", "Cash", "Torneos" };
-    static readonly string[] ScopeKeys = { "all", "cash", "tournament" };
+    static readonly string[] ScopeNames = { "Todos", "Cash", "Spin & Go", "Torneos MTT/SNG", "Zoom" };
+    static readonly string[] ScopeKeys = { "all", "cash", "spin", "mtt", "zoom" };
 
     readonly DataGrid _grid;
     readonly TextBlock _info = Ui.Label("", 12, false, Theme.Muted, new Thickness(0, 0, 0, 8));

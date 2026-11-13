@@ -45,6 +45,7 @@ public sealed class AppServices : IDisposable
         Builder = new HudSnapshotBuilder(Db, Engine, Priors, Notes) { Archetypes = key => Archetypes.Cached(key) };
         Detail = new PlayerDetailService(Db, Engine, Priors);
         Analytics = new Analytics(Db);
+        try { FilterBar.PreferredScope = Analytics.PreferredScope(); } catch (Exception) { /* sin datos todavía: se abre en cash */ }
         Leaks = new LeakDetector(Db, Engine);
         Study = new StudyService(Db);
         Bankroll = new BankrollService(Db);
@@ -78,7 +79,7 @@ public sealed class AppServices : IDisposable
         catch { /* archivo ilegible o de solo lectura: se usan los de serie */ LeakBaselines = LeakDetector.LoadBaselines(); }
     }
 
-    public HudOptions Options => new() { Mode = Settings.HonestMode ? HudMode.Honest : HudMode.Classic };
+    public HudOptions Options => new() { Mode = Settings.HonestMode ? HudMode.Honest : HudMode.Classic, Scope = Settings.HudScope };
 
     public void Dispose()
     {

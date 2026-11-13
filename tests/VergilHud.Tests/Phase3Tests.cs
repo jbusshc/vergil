@@ -371,7 +371,7 @@ public class SnapshotTests
     }
 
     [Fact]
-    public void Tournament_profiles_fall_back_to_all_hands_with_an_asterisk_when_the_scope_has_little_data()
+    public void Tournament_profiles_do_not_mix_cash_hands_unless_the_scope_is_global()
     {
         var t0 = new DateTime(2026, 3, 1, 10, 0, 0);
         // Villain1 tiene 40 manos de cash pero solo 1 de torneo (tour_06): el perfil de torneo debe usar las 41, con asterisco.
@@ -381,9 +381,48 @@ public class SnapshotTests
         var prof = HudProfiles.Select(HudProfiles.CreateDefaults(), tour.Format, tour.MaxSeats);
         Assert.Equal("tournament", prof.Id);
         var seat = Builder(db, out _).Build(tour, prof).First(s => s.Player == "Villain1");
-        Assert.Equal(41, seat.Hands);
-        Assert.True(Cell(seat, "vpip").Asterisk);
+        Assert.Equal(1, seat.Hands);          // por defecto, solo torneos: el cash no cuenta
+        Assert.False(Cell(seat, "vpip").Asterisk);
+        var global = Builder(db, out _).Build(tour, prof, new HudOptions { Scope = HudScope.Global }).First(s => s.Player == "Villain1");
+        Assert.Equal(41, global.Hands);       // en Global sí se ve todo el historial
     }
+
+    [Fact]
+    public void Play_money_hands_are_kept_apart_from_real_money()
+    {
+        var t0 = new DateTime(2026, 3, 1, 10, 0, 0);
+        var real = Enumerable.Range(0, 10).Select(i => Synth.PreHand(8000 + i, t0.AddMinutes(i), "Hero", true)).ToList();
+        var play = Enumerable.Range(0, 7).Select(i => { var h = Synth.PreHand(8100 + i, t0.AddMinutes(30 + i), "Hero", true); h.IsPlayMoney = true; return h; }).ToList();
+        using var db = Synth.Db(real.Concat(play));
+        var engine = new StatEngine(db);
+        Assert.Equal(10, engine.Get("Villain1", "vpip").Denominator);                                          // el dinero real no incluye la práctica
+        Assert.Equal(7, engine.Get("Villain1", "vpip", new StatFilter { PlayMoney = true }).Denominator);      // la práctica, en su sitio
+        var seat = Builder(db, out _).Build(play[0], HudProfiles.CreateDefaults()[1]).First(s => s.Player == "Villain1");
+        Assert.Equal(7, seat.Hands);                                                                            // una mesa de práctica muestra solo práctica
+    }
+
+    [Fact]
+    public void Table_scope_only_counts_hands_from_this_table()
+    {
+        var t0 = new DateTime(2026, 3, 1, 10, 0, 0);
+        var here = Enumerable.Range(0, 6).Select(i => Synth.PreHand(8200 + i, t0.AddMinutes(i), "Hero", true)).ToList();
+        var other = Enumerable.Range(0, 9).Select(i => Synth.PreHand(8300 + i, t0.AddMinutes(20 + i), "Hero", true, "Otra mesa")).ToList();
+        using var db = Synth.Db(here.Concat(other));
+        var prof = HudProfiles.CreateDefaults()[1];
+        var table = Builder(db, out _).Build(here[0], prof, new HudOptions { Scope = HudScope.Table }).First(s => s.Player == "Villain1");
+        Assert.Equal(6, table.Hands);
+        var fmt = Builder(db, out _).Build(here[0], prof).First(s => s.Player == "Villain1");
+        Assert.Equal(15, fmt.Hands);
+    }
+
+    [Theory]
+    [InlineData("PokerStars Hand #1:  Hold'em No Limit (10/20) - 2026/03/01 10:00:00 ET", true)]
+    [InlineData("PokerStars Hand #1:  Hold'em No Limit ($0.01/$0.02 USD) - 2026/03/01 10:00:00 ET", false)]
+    [InlineData("PokerStars Hand #1: Tournament #9, 9000+1000 Hold'em No Limit - Level I (10/20) - 2026/03/01", true)]
+    [InlineData("PokerStars Hand #1: Tournament #9, $0.98+$0.02 USD Hold'em No Limit - Level I (10/20) - 2026/03/01", false)]
+    [InlineData("PokerStars Hand #1:  Hold'em No Limit (€0.01/€0.02 EUR) - 2026/03/01 10:00:00 ET", false)]
+    public void Play_money_is_detected_from_the_header_currency(string header, bool play) =>
+        Assert.Equal(play, PokerStarsParser.IsPlayMoneyHeader(header));
 }
 
 public class HandLineTests

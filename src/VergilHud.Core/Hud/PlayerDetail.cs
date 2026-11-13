@@ -118,14 +118,38 @@ public sealed class PlayerDetailService
 
         return new PostflopReport(rows, sizes, new Dictionary<string, double?>
         {
-            ["flop"] = MedianBetPct(player, "f_bet_size_pct"),
-            ["turn"] = MedianBetPct(player, "t_bet_size_pct"),
-            ["river"] = MedianBetPct(player, "r_bet_size_pct"),
+            ["flop"] = MedianBetPct(player, "f_bet_size_pct", filter),
+            ["turn"] = MedianBetPct(player, "t_bet_size_pct", filter),
+            ["river"] = MedianBetPct(player, "r_bet_size_pct", filter),
         });
     }
 
+    /// <summary>Condiciones SQL extra de un filtro (tipo de juego, mesa, torneo) para consultas sueltas sobre la tabla de hechos.</summary>
+    static string FilterSql(StatFilter? f, Microsoft.Data.Sqlite.SqliteCommand cmd, string alias)
+    {
+        if (f == null) return "";
+        var sb = new System.Text.StringBuilder();
+        if (f.Formats is { Count: > 0 })
+        {
+            var names = new List<string>();
+            for (int i = 0; i < f.Formats.Count; i++) { names.Add("$ff" + i); cmd.Parameters.AddWithValue("$ff" + i, f.Formats[i]); }
+            sb.Append($" AND {alias}format IN ({string.Join(",", names)})");
+        }
+        if (f.TableName != null)
+        {
+            sb.Append($" AND {alias}hand_id IN (SELECT hand_id FROM hands WHERE table_name = $ft_tbl)");
+            cmd.Parameters.AddWithValue("$ft_tbl", f.TableName);
+        }
+        if (f.TournamentId != null)
+        {
+            sb.Append($" AND {alias}tournament_id = $ft_tid");
+            cmd.Parameters.AddWithValue("$ft_tid", f.TournamentId);
+        }
+        return sb.ToString();
+    }
+
     /// <summary>Mediana del tamaño de sus apuestas (% del bote) en esa calle. Null si nunca ha apostado.</summary>
-    public double? MedianBetPct(string player, string factColumn)
+    public double? MedianBetPct(string player, string factColumn, StatFilter? filter = null)
     {
         if (!FactCatalog.Contains(factColumn) || FactCatalog.Get(factColumn).Kind != FactKind.Real)
             throw new ArgumentException($"'{factColumn}' no es un hecho numérico");
@@ -136,7 +160,7 @@ public sealed class PlayerDetailService
             var ps = new List<string>();
             for (int i = 0; i < names.Count; i++) { ps.Add("$p" + i); cmd.Parameters.AddWithValue("$p" + i, names[i]); }
             // El nombre de la columna sale de la lista blanca del catálogo (validado arriba).
-            cmd.CommandText = $"SELECT {factColumn} FROM player_hand_facts WHERE player IN ({string.Join(",", ps)}) AND {factColumn} IS NOT NULL ORDER BY {factColumn}";
+            cmd.CommandText = $"SELECT {factColumn} FROM {filter?.FactsTable ?? "player_hand_facts"} WHERE player IN ({string.Join(",", ps)}) AND {factColumn} IS NOT NULL{FilterSql(filter, cmd, "")} ORDER BY {factColumn}";
             using var r = cmd.ExecuteReader();
             var l = new List<double>();
             while (r.Read()) l.Add(r.GetDouble(0));
@@ -148,7 +172,7 @@ public sealed class PlayerDetailService
     }
 
     /// <summary>Últimos showdowns con cartas conocidas, con la línea jugada en una sola fila.</summary>
-    public List<ShowdownRow> Showdowns(string player, int limit = 20)
+    public List<ShowdownRow> Showdowns(string player, int limit = 20, StatFilter? filter = null)
     {
         var names = _engine.HeroNames.Contains(player) ? _engine.HeroNames.ToList() : new List<string> { player };
         var rows = _db.Query(conn =>
@@ -156,9 +180,9 @@ public sealed class PlayerDetailService
             using var cmd = conn.CreateCommand();
             var ps = new List<string>();
             for (int i = 0; i < names.Count; i++) { ps.Add("$p" + i); cmd.Parameters.AddWithValue("$p" + i, names[i]); }
-            cmd.CommandText = "SELECT h.hand_id, h.played_at, h.raw, f.hole_cards, f.net_bb, f.player FROM player_hand_facts f " +
+            cmd.CommandText = $"SELECT h.hand_id, h.played_at, h.raw, f.hole_cards, f.net_bb, f.player FROM {filter?.FactsTable ?? "player_hand_facts"} f " +
                               "JOIN hands h ON h.hand_id = f.hand_id " +
-                              $"WHERE f.player IN ({string.Join(",", ps)}) AND f.wtsd = 1 AND f.hole_cards IS NOT NULL " +
+                              $"WHERE f.player IN ({string.Join(",", ps)}) AND f.wtsd = 1 AND f.hole_cards IS NOT NULL{FilterSql(filter, cmd, "f.")} " +
                               "ORDER BY f.played_at DESC, f.hand_id DESC LIMIT $n";
             cmd.Parameters.AddWithValue("$n", limit);
             using var r = cmd.ExecuteReader();

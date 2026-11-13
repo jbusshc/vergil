@@ -10,7 +10,7 @@ public interface IMigration
 
 public static class Migrator
 {
-    public static readonly IReadOnlyList<IMigration> All = new IMigration[] { new M001Initial(), new M002FactsSchema(), new M003Analysis(), new M004Notes(), new M005Study(), new M006Wellbeing() };
+    public static readonly IReadOnlyList<IMigration> All = new IMigration[] { new M001Initial(), new M002FactsSchema(), new M003Analysis(), new M004Notes(), new M005Study(), new M006Wellbeing(), new M007PlayMoney() };
     public static int Latest => All[^1].Version;
 
     public static int GetVersion(SqliteConnection c)
@@ -138,6 +138,7 @@ sealed class M002FactsSchema : IMigration
         Migrator.Exec(c, tx, "DROP INDEX IF EXISTS ix_hands_time");
         Migrator.Exec(c, tx, HandStore.OtherTablesSql);
         Migrator.Exec(c, tx, HandStore.FactsTableSql());
+        Migrator.Exec(c, tx, HandStore.FactsTableSql(HandStore.PlayTable));
 
         using var read = c.CreateCommand();
         read.Transaction = tx;
@@ -188,5 +189,54 @@ sealed class M006Wellbeing : IMigration
             id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, kind TEXT NOT NULL, amount REAL NOT NULL, note TEXT NOT NULL DEFAULT '')");
         Migrator.Exec(c, tx, @"CREATE TABLE IF NOT EXISTS journal(
             id INTEGER PRIMARY KEY AUTOINCREMENT, at TEXT NOT NULL, phase TEXT NOT NULL, mood INTEGER, fatigue INTEGER, note TEXT NOT NULL DEFAULT '')");
+    }
+}
+
+/// <summary>
+/// Esquema v7: el dinero ficticio se guarda aparte (tabla play_hand_facts) para no mezclarlo con el dinero real en ninguna estadística.
+/// Mueve las manos de práctica que ya estaban mezcladas.
+/// </summary>
+sealed class M007PlayMoney : IMigration
+{
+    public int Version => 7;
+
+    static bool Exists(SqliteConnection c, SqliteTransaction tx, string sql)
+    {
+        using var cmd = c.CreateCommand();
+        cmd.Transaction = tx;
+        cmd.CommandText = sql;
+        return Convert.ToInt32(cmd.ExecuteScalar()) > 0;
+    }
+
+    public void Up(SqliteConnection c, SqliteTransaction tx)
+    {
+        if (!Exists(c, tx, "SELECT COUNT(*) FROM pragma_table_info('hands') WHERE name = 'play_money'"))
+            Migrator.Exec(c, tx, "ALTER TABLE hands ADD COLUMN play_money INTEGER NOT NULL DEFAULT 0");
+        if (!Exists(c, tx, $"SELECT COUNT(*) FROM sqlite_master WHERE type = 'table' AND name = '{HandStore.PlayTable}'"))
+            Migrator.Exec(c, tx, HandStore.FactsTableSql(HandStore.PlayTable));
+
+        // Solo hace falta mirar la primera línea (la cabecera) de cada mano
+        var play = new List<(string Id, string? Tournament)>();
+        using (var read = c.CreateCommand())
+        {
+            read.Transaction = tx;
+            read.CommandText = "SELECT hand_id, tournament_id, substr(raw, 1, instr(raw || char(10), char(10)) - 1) FROM hands WHERE play_money = 0";
+            using var r = read.ExecuteReader();
+            while (r.Read())
+                if (!r.IsDBNull(2) && PokerStarsParser.IsPlayMoneyHeader(r.GetString(2)))
+                    play.Add((r.GetString(0), r.IsDBNull(1) ? null : r.GetString(1)));
+        }
+        if (play.Count == 0) return;
+
+        var cols = "hand_id,player,seat," + string.Join(",", FactCatalog.Columns.Select(x => x.Name));
+        foreach (var chunk in play.Chunk(400))
+        {
+            var ids = string.Join(",", chunk.Select(x => "'" + x.Id.Replace("'", "''") + "'"));
+            Migrator.Exec(c, tx, $"INSERT OR IGNORE INTO {HandStore.PlayTable}({cols}) SELECT {cols} FROM player_hand_facts WHERE hand_id IN ({ids})");
+            Migrator.Exec(c, tx, $"DELETE FROM player_hand_facts WHERE hand_id IN ({ids})");
+            Migrator.Exec(c, tx, $"UPDATE hands SET play_money = 1 WHERE hand_id IN ({ids})");
+        }
+        foreach (var t in play.Where(x => x.Tournament != null).Select(x => x.Tournament!).Distinct().Chunk(400))
+            Migrator.Exec(c, tx, $"DELETE FROM tournaments WHERE id IN ({string.Join(",", t.Select(x => "'" + x.Replace("'", "''") + "'"))})");
     }
 }

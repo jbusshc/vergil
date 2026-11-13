@@ -13,6 +13,9 @@ public sealed class PlayersView : ViewBase
     readonly TextBox _min = new() { Width = 60, Text = "1" };
     readonly DataGrid _grid;
     int _version;
+    int _scope = Math.Max(0, Array.IndexOf(new[] { "cash", "spin", "mtt", "zoom" }, FilterBar.PreferredScope));
+    static readonly string[] ScopeNames = { "Cash", "Spin & Go", "Torneos MTT/SNG", "Zoom", "Todo el dinero real", "Dinero ficticio" };
+    static readonly string[][] ScopeFormats = { new[] { "cash" }, new[] { "spin" }, new[] { "mtt", "sng" }, new[] { "zoom" }, Array.Empty<string>(), Array.Empty<string>() };
 
     public PlayersView(AppServices svc) : base(svc)
     {
@@ -36,6 +39,8 @@ public sealed class PlayersView : ViewBase
         var bar = new StackPanel { Orientation = Orientation.Horizontal, Margin = new Thickness(0, 0, 0, 8) };
         bar.Children.Add(Ui.Label("Buscar jugador", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
         bar.Children.Add(_search);
+        bar.Children.Add(Ui.Label("Tipo de juego", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
+        bar.Children.Add(Ui.Combo(ScopeNames, _scope, i => { _scope = i; if (IsLoaded) Refresh(); }, 150));
         bar.Children.Add(Ui.Label("Mín. manos", 13, false, Theme.Muted, new Thickness(0, 0, 8, 0)));
         bar.Children.Add(_min);
 
@@ -56,9 +61,10 @@ public sealed class PlayersView : ViewBase
         {
             var filter = _search.Text.Trim();
             int.TryParse(_min.Text, out var min);
+            int scope = _scope;
             var (rows, hero) = await Bg(() =>
             {
-                var rows = Svc.Db.GetAllPlayerStats(filter, Math.Max(1, min));
+                var rows = Svc.Db.GetAllPlayerStats(filter, Math.Max(1, min), 2000, ScopeFormats[scope].Length == 0 ? null : ScopeFormats[scope], scope == 5);
                 string? text = null;
                 var heroes = Svc.Engine.HeroNames;
                 if (heroes.Count > 0)

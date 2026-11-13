@@ -59,7 +59,7 @@ public sealed class HudEditorWindow : Window
         _stats.SelectionChanged += (_, _) => { if (!_loading) FillStatOptions(); };
 
         var root = new StackPanel { Margin = new Thickness(16) };
-        root.Children.Add(Ui.Label("Perfil", 13, true));
+        root.Children.Add(Ui.Label("Perfil de HUD", 13, true));
         var top = new WrapPanel { Margin = new Thickness(0, 4, 0, 8) };
         top.Children.Add(_profiles);
         top.Children.Add(Ui.Label("Nombre", 12, false, Theme.Muted, new Thickness(0, 0, 6, 0)));

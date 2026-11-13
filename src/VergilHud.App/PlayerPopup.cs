@@ -21,38 +21,54 @@ public static class PlayerPopup
         return br;
     }
 
-    public static UIElement Create(AppServices svc, string player, HudProfile profile, int initialTab = 0, bool editableNotes = false)
+    /// <summary>
+    /// Ficha del jugador. Las estadísticas se calculan sobre un ámbito que se cambia con el botón de arriba: en una mesa, el mismo tipo de juego /
+    /// todo el historial / solo esa mesa; fuera de una mesa, por tipo de juego. Nunca se mezcla dinero real con ficticio.
+    /// </summary>
+    public static UIElement Create(AppServices svc, string player, HudProfile profile, int initialTab = 0, bool editableNotes = false,
+        HandContext? ctx = null, HudScope? initialScope = null)
     {
-        var scope = profile.ScopeFormats();
-        var hands = (int)svc.Engine.Get(player, "vpip").Denominator;
+        var scopes = ctx != null ? StatScopes.ForHand(ctx) : StatScopes.General();
+        int idx = ctx != null ? (int)(initialScope ?? svc.Settings.HudScope) : StatScopes.BestGeneral(svc.Engine, player);
+        idx = Math.Clamp(idx, 0, scopes.Count - 1);
 
-        var tabs = new TabControl
+        var title = new TextBlock { Foreground = White, FontWeight = FontWeights.Bold, FontSize = 14, VerticalAlignment = VerticalAlignment.Center };
+        var scopeBtn = new Button
         {
-            Background = Panel,
-            Foreground = White,
-            BorderThickness = new Thickness(0),
-            Width = 560,
-            MaxHeight = 470,
+            Foreground = White, Background = Brush(48, 48, 58), BorderBrush = Brush(90, 90, 100), Padding = new Thickness(8, 2, 8, 2),
+            Margin = new Thickness(10, 0, 10, 0), Cursor = System.Windows.Input.Cursors.Hand, HorizontalAlignment = HorizontalAlignment.Left,
+            ToolTip = "Qué manos cuentan en las estadísticas de esta ficha. Clic para pasar al siguiente ámbito.\n" +
+                      "El dinero real y el ficticio nunca se mezclan; los tipos de juego (cash, Spin & Go, torneos) tienen dinámicas distintas.",
         };
-        tabs.Items.Add(Tab("Resumen", () => Summary(svc, player, scope)));
-        tabs.Items.Add(Tab("Por posición", () => ByPosition(svc, player)));
-        tabs.Items.Add(Tab("Postflop", () => Postflop(svc, player)));
-        tabs.Items.Add(Tab("Showdowns", () => Showdowns(svc, player)));
-        tabs.Items.Add(Tab("Notas", () => NotesPanel.Create(svc, player, editableNotes)));
-        tabs.SelectedIndex = Math.Clamp(initialTab, 0, tabs.Items.Count - 1);
+        var host = new ContentControl();
+        int tab = Math.Clamp(initialTab, 0, 4);
 
-        var title = new TextBlock
+        void Build()
         {
-            Text = $"{player}   {hands} manos",
-            Foreground = White,
-            FontWeight = FontWeights.Bold,
-            FontSize = 14,
-            Margin = new Thickness(10, 8, 10, 4),
-        };
+            var sc = scopes[idx];
+            var tabs = new TabControl { Background = Panel, Foreground = White, BorderThickness = new Thickness(0), Width = 560, MaxHeight = 470 };
+            tabs.Items.Add(Tab("Resumen", () => Summary(svc, player, sc)));
+            tabs.Items.Add(Tab("Por posición", () => ByPosition(svc, player, sc.Filter)));
+            tabs.Items.Add(Tab("Postflop", () => Postflop(svc, player, sc.Filter)));
+            tabs.Items.Add(Tab("Showdowns", () => Showdowns(svc, player, sc.Filter)));
+            tabs.Items.Add(Tab("Notas", () => NotesPanel.Create(svc, player, editableNotes)));
+            tabs.SelectedIndex = Math.Clamp(tab, 0, tabs.Items.Count - 1);
+            tabs.SelectionChanged += (_, e) => { if (e.OriginalSource == tabs) tab = tabs.SelectedIndex; };
+            host.Content = tabs;
+            title.Text = $"{player}   {(int)svc.Engine.Get(player, "vpip", sc.Filter).Denominator} manos";
+            scopeBtn.Content = $"Ámbito: {sc.Name}  ⟳";
+        }
+        scopeBtn.Click += (_, _) => { idx = (idx + 1) % scopes.Count; Build(); };
+        Build();
+
+        var head = new StackPanel { Margin = new Thickness(0, 8, 0, 4) };
+        title.Margin = new Thickness(10, 0, 10, 4);
+        head.Children.Add(title);
+        head.Children.Add(scopeBtn);
         var root = new DockPanel();
-        DockPanel.SetDock(title, Dock.Top);
-        root.Children.Add(title);
-        root.Children.Add(tabs);
+        DockPanel.SetDock(head, Dock.Top);
+        root.Children.Add(head);
+        root.Children.Add(host);
         return new Border
         {
             Background = Panel,
@@ -62,7 +78,6 @@ public static class PlayerPopup
             Child = root,
         };
     }
-
     static TabItem Tab(string header, Func<UIElement> content)
     {
         UIElement body;
@@ -76,9 +91,9 @@ public static class PlayerPopup
     }
 
     // ---------- Resumen ----------
-    static UIElement Summary(AppServices svc, string player, IReadOnlyList<string>? scope)
+    static UIElement Summary(AppServices svc, string player, StatScope scope)
     {
-        var rows = svc.Detail.Summary(player, null, null);
+        var rows = svc.Detail.Summary(player, scope.Filter, scope.PriorFormats);
         var g = Table(new[] { "Estadística", "Crudo", "Honesto", "Intervalo 80 %", "N", "Fiab." }, new[] { 150.0, 90, 60, 100, 40, 50 });
         int r = 1;
         foreach (var s in rows)
@@ -100,9 +115,9 @@ public static class PlayerPopup
     }
 
     // ---------- Por posición ----------
-    static UIElement ByPosition(AppServices svc, string player)
+    static UIElement ByPosition(AppServices svc, string player, StatFilter filter)
     {
-        var data = svc.Detail.ByPosition(player);
+        var data = svc.Detail.ByPosition(player, filter);
         var cols = new[] { "" }.Concat(PlayerDetailService.Positions).ToArray();
         var g = Table(cols, new[] { 70.0 }.Concat(PlayerDetailService.Positions.Select(_ => 66.0)).ToArray());
         int r = 1;
@@ -124,9 +139,9 @@ public static class PlayerPopup
     }
 
     // ---------- Postflop ----------
-    static UIElement Postflop(AppServices svc, string player)
+    static UIElement Postflop(AppServices svc, string player, StatFilter filter)
     {
-        var rep = svc.Detail.Postflop(player);
+        var rep = svc.Detail.Postflop(player, filter);
         var host = new StackPanel { Margin = new Thickness(8) };
 
         string Fmt(StatValue v) => v.N == 0 ? "·" : $"{(v.Value!.Value * 100):0} ({v.N})";
@@ -155,9 +170,9 @@ public static class PlayerPopup
     }
 
     // ---------- Showdowns ----------
-    static UIElement Showdowns(AppServices svc, string player)
+    static UIElement Showdowns(AppServices svc, string player, StatFilter filter)
     {
-        var rows = svc.Detail.Showdowns(player, 20);
+        var rows = svc.Detail.Showdowns(player, 20, filter);
         var host = new StackPanel { Margin = new Thickness(8) };
         if (rows.Count == 0)
         {

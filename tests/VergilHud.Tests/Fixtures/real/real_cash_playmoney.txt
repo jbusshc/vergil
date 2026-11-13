@@ -1,4 +1,4 @@
-﻿PokerStars Hand #262681542548:  Hold'em No Limit (250/500) - 2026/11/12 0:15:12 UTC [2026/11/11 19:15:12 ET]
+﻿PokerStars Hand #262681542548:  Hold'em No Limit ($250/$500 USD) - 2026/11/12 0:15:12 UTC [2026/11/11 19:15:12 ET]
 Table 'Myrrha' 9-max (Play Money) Seat #2 is the button
 Seat 3: Villain7 (50000 in chips) is sitting out
 Seat 8: Villain8 (50000 in chips) is sitting out
@@ -62,7 +62,7 @@ Seat 9: Villain6 collected (4961)
 
 
 
-PokerStars Hand #262681559564:  Hold'em No Limit (250/500) - 2026/11/12 0:17:02 UTC [2026/11/11 19:17:02 ET]
+PokerStars Hand #262681559564:  Hold'em No Limit ($250/$500 USD) - 2026/11/12 0:17:02 UTC [2026/11/11 19:17:02 ET]
 Table 'Myrrha' 9-max (Play Money) Seat #4 is the button
 Seat 3: Villain7 (50000 in chips) is sitting out
 Seat 7: Villain5 (49500 in chips) is sitting out

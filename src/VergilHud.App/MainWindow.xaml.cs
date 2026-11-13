@@ -232,6 +232,7 @@ public partial class MainWindow : Window
         {
             _hotkeys.Attach(this);
             _hotkeys.Add('H', () => { if (_overlays != null) _overlays.Hidden = !_overlays.Hidden; });
+            _hotkeys.Add('G', () => _settings.CycleScope());
             _hotkeys.Add('L', () => { _settings.LockPanels = !_settings.LockPanels; _settings.Save(); _overlays?.InvalidateAll(); });
         }
     }

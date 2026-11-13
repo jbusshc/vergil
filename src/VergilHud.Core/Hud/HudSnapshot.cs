@@ -8,11 +8,21 @@ public enum HudMode
     Classic,
 }
 
+/// <summary>Qué manos alimentan las estadísticas del HUD.</summary>
+public enum HudScope
+{
+    /// <summary>Solo manos del mismo tipo de juego (cash con cash, Spin con Spin, torneos con torneos) y del mismo tipo de dinero.</summary>
+    Format,
+    /// <summary>Todo el historial de dinero real (o ficticio, si la mesa es de práctica), sea cual sea el tipo de juego.</summary>
+    Global,
+    /// <summary>Solo las manos de esta mesa (o de este torneo).</summary>
+    Table,
+}
+
 public sealed class HudOptions
 {
     public HudMode Mode { get; set; } = HudMode.Honest;
-    /// <summary>Si en el ámbito del perfil (p. ej. torneos) hay menos manos que esto, se usan todas y se marca con asterisco.</summary>
-    public int ScopeFallbackMinHands { get; set; } = 30;
+    public HudScope Scope { get; set; } = HudScope.Format;
     /// <summary>Muestra mínima, dentro del cubo de stack actual, para usar la estadística "según stack".</summary>
     public int StackBucketMinSample { get; set; } = 10;
     /// <summary>Muestra mínima de cada tamaño (pequeña y grande) para mostrar "pq·gr".</summary>
@@ -85,24 +95,21 @@ public sealed class HudSnapshotBuilder
 
         var players = seats.Select(s => s.Player).ToList();
         decimal bb = hand.BigBlind > 0 ? hand.BigBlind : 1;
-        var scope = profile.ScopeFormats();
+        // 1) Ámbito: mismo tipo de juego (por defecto), todo el historial o solo esta mesa. El dinero ficticio nunca se mezcla con el real.
+        var scope = o.Scope == HudScope.Format && profile.DataScope != "all" ? HudProfiles.FormatGroup(hand.Format) : null;
         DateTime? sessionStart = profile.Window == "session" ? _db.GetCurrentSessionStart() : null;
-
-        StatFilter Make(IReadOnlyList<string>? fmts) => new()
+        bool thisTable = o.Scope == HudScope.Table;
+        var scopeFilter = new StatFilter
         {
-            Formats = fmts,
+            Formats = thisTable ? null : scope,
+            PlayMoney = hand.IsPlayMoney,
+            TableName = thisTable && !hand.IsTournament ? hand.TableName : null,
+            TournamentId = thisTable && hand.IsTournament ? hand.TournamentId : null,
             LastHands = profile.Window == "last100" ? o.RecentWindow : null,
             From = sessionStart,
         };
-        var scopeFilter = Make(scope);
-        var allFilter = Make(null);
-
-        // 1) ¿Hay manos suficientes en el ámbito del perfil? Si no, se usan todas (con asterisco).
-        var inAll = _engine.GetMany(players, new[] { "vpip" }, allFilter);
-        var inScope = scope == null ? null : _engine.GetMany(players, new[] { "vpip" }, scopeFilter);
-        var useAll = players.ToDictionary(p => p, p =>
-            scope != null && inScope![p]["vpip"].N < o.ScopeFallbackMinHands && inAll[p]["vpip"].N > inScope[p]["vpip"].N);
-        var filterOf = players.ToDictionary(p => p, p => useAll[p] ? allFilter : scopeFilter);
+        var useAll = players.ToDictionary(p => p, _ => false);
+        var filterOf = players.ToDictionary(p => p, _ => scopeFilter);
 
         // 2) Estadísticas necesarias (las del perfil, las de tamaño y las del badge).
         var refs = profile.Lines.SelectMany(l => l.Stats).Where(r => _engine.Has(r.Id)).ToList();
@@ -146,7 +153,7 @@ public sealed class HudSnapshotBuilder
         {
             var p = seat.Player;
             var vals = values[p];
-            var priorFormats = useAll[p] ? null : scope;
+            var priorFormats = scope;
             var lines = new List<HudLineView>();
             foreach (var line in profile.Lines)
             {
@@ -181,20 +188,20 @@ public sealed class HudSnapshotBuilder
             }
 
             annotations.TryGetValue(p, out var ann);
-            result.Add(new HudSeatView(p, seat.Number, (int)vals["vpip"].Denominator, Badge(p, hand.Format, vals, priorFormats), p == hand.Hero, lines,
+            result.Add(new HudSeatView(p, seat.Number, (int)vals["vpip"].Denominator, Badge(p, hand.Format, hand.IsPlayMoney, vals, priorFormats), p == hand.Hero, lines,
                 ann?.ColorLabel, ann?.Note));
         }
         return result;
     }
 
-    string Badge(string player, string? format, Dictionary<string, StatValue> vals, IReadOnlyList<string>? priorFormats)
+    string Badge(string player, string? format, bool playMoney, Dictionary<string, StatValue> vals, IReadOnlyList<string>? priorFormats)
     {
         var model = Archetypes?.Invoke(ArchetypeModel.KeyForFormat(format));
         if (model != null)
         {
             try
             {
-                if (model.Classify(player, _engine, _priors, out var n) is { } r && n >= 15)
+                if (!playMoney && model.Classify(player, _engine, _priors, out var n) is { } r && n >= 15)
                     return r.Confidence >= 0.6 ? r.Archetype.Label : r.Archetype.Label + "?";
             }
             catch (Exception) { /* sin modelo utilizable: clasificador fijo */ }
