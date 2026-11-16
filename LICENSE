@@ -1,21 +1,24 @@
-MIT License
+Licencia de Uso Personal de Vergil HUD
+Copyright (c) 2026 Jorge Bussh. Todos los derechos reservados salvo lo concedido aquí.
 
-Copyright (c) 2026 Jorge Bussh
+1. CONCESIÓN. Se te concede una licencia gratuita, no exclusiva e intransferible para
+   descargar, compilar, ejecutar y estudiar este software y su código fuente para tu uso
+   personal y no comercial, y para modificarlo en tu propio equipo con ese mismo fin.
 
-Permission is hereby granted, free of charge, to any person obtaining a copy
-of this software and associated documentation files (the "Software"), to deal
-in the Software without restriction, including without limitation the rights
-to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
-copies of the Software, and to permit persons to whom the Software is
-furnished to do so, subject to the following conditions:
+2. RESTRICCIONES. Sin permiso previo y por escrito del autor, no puedes:
+   a) redistribuir, publicar o alojar el software, el código o versiones modificadas;
+   b) venderlo, sublicenciarlo ni incluirlo en un producto o servicio, de pago o gratuito;
+   c) usarlo con fines comerciales;
+   d) eliminar o alterar los avisos de autoría, esta licencia o el aviso de no afiliación.
+   Se permite hacer un fork en GitHub únicamente para proponer cambios al autor.
 
-The above copyright notice and this permission notice shall be included in all
-copies or substantial portions of the Software.
+3. NO AFILIACIÓN. Este es un proyecto independiente. No está afiliado, patrocinado ni
+   respaldado por PokerStars ni por Amaury Group. Eres el único responsable de comprobar que
+   su uso cumple las normas de las salas de poker y la legislación aplicable.
 
-THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
-IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
-FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
-AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
-LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
-OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
+4. TERCEROS. Las bibliotecas de terceros que usa conservan sus propias licencias (ver NOTICE.md).
+
+5. SIN GARANTÍA. EL SOFTWARE SE ENTREGA "TAL CUAL", SIN GARANTÍA DE NINGÚN TIPO. EL AUTOR NO
+   RESPONDE DE DAÑOS, PÉRDIDAS DE DINERO NI SANCIONES DERIVADAS DE SU USO.
+
+6. TERMINACIÓN. Esta licencia termina automáticamente si incumples cualquiera de sus términos.

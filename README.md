@@ -8,7 +8,7 @@
 ![.NET 8](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet)
 ![WPF](https://img.shields.io/badge/UI-WPF-5C2D91)
 ![SQLite](https://img.shields.io/badge/datos-SQLite-003B57?logo=sqlite)
-![Licencia MIT](https://img.shields.io/badge/licencia-MIT-green)
+![Licencia MIT](https://img.shields.io/badge/licencia-uso%20personal-orange)
 ![Sin red](https://img.shields.io/badge/red-nunca-success)
 
 [Características](#características) · [Instalación](#uso) · [Capturas](#capturas) · [Estadísticas propias](#estadísticas-propias) · [Diseño](DESIGN.md) · [Decisiones](docs/DECISIONS.md)
@@ -117,4 +117,4 @@ Las expresiones solo pueden usar los hechos de `docs/FACTS.md`; cualquier otro n
 ## Aviso y licencia
 - Proyecto personal e independiente: **no está afiliado a PokerStars**. Solo muestra estadísticas históricas de manos ya jugadas y no da consejos en vivo.
   Revisa siempre las normas de herramientas permitidas vigentes de la sala antes de usarlo en mesas reales.
-- Licencia [MIT](LICENSE) · © 2026 Jorge Bussh. Dependencias y marcas en [NOTICE.md](NOTICE.md).
+- Licencia de [uso personal](LICENSE) (código visible, no redistribuible ni comercial) · © 2026 Jorge Bussh. Dependencias y marcas en [NOTICE.md](NOTICE.md).
