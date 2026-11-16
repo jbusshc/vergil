@@ -1,7 +1,39 @@
+<div align="center">
+
 # Vergil HUD
 
-HUD y base de datos propios para PokerStars (Windows, .NET 8 + WPF + SQLite). Funciona 100 % sin conexión.
-El plan completo está en [DESIGN.md](DESIGN.md); las decisiones tomadas por el camino, en [docs/DECISIONS.md](docs/DECISIONS.md).
+**HUD, base de datos y análisis de poker para PokerStars. Tuyo, local y sin conexión.**
+
+![Windows](https://img.shields.io/badge/Windows-10%2F11-0078D4?logo=windows)
+![.NET 8](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet)
+![WPF](https://img.shields.io/badge/UI-WPF-5C2D91)
+![SQLite](https://img.shields.io/badge/datos-SQLite-003B57?logo=sqlite)
+![Licencia MIT](https://img.shields.io/badge/licencia-MIT-green)
+![Sin red](https://img.shields.io/badge/red-nunca-success)
+
+[Características](#características) · [Instalación](#uso) · [Capturas](#capturas) · [Estadísticas propias](#estadísticas-propias) · [Diseño](DESIGN.md) · [Decisiones](docs/DECISIONS.md)
+
+</div>
+
+---
+
+## Características
+
+| | |
+|---|---|
+| 🎯 **HUD honesto** | Con pocas manos el número se acerca a la población y lleva barra de fiabilidad, en vez de enseñar "VPIP 100" tras 2 manos. |
+| 📊 **Análisis** | Dashboard, informes por posición/stack/límite, matriz 13×13, sesiones, torneos con ROI e intervalo de confianza. |
+| 🍀 **EV de all-ins** | Cuánto habrías ganado de media frente al resultado real, y banda de varianza para saber si una racha es normal. |
+| 🔍 **Detector de leaks** | Bayesiano, ordenado por lo que te cuesta en bb/100. |
+| 🧠 **Estudio** | Repaso espaciado (SM-2), solver Nash push/fold, análisis ICM y manos diarias. |
+| 🧘 **Bienestar** | Tilt, límites, bankroll y riesgo de ruina, diario e informe semanal. |
+| 🔒 **Privado** | 100 % local: la app nunca abre una conexión de red (una prueba lo vigila). |
+
+## Capturas
+
+<p align="center"><img src="docs/img/grafica_ganancias.png" alt="Ganancias acumuladas con EV y banda de varianza" width="800"></p>
+<p align="center"><img src="docs/img/vista_informes_matriz.png" alt="Matriz 13x13 de manos de salida" width="560">&nbsp;<img src="docs/img/vista_leaks.png" alt="Detector de leaks" width="560"></p>
+<p align="center"><sub>Datos de demostración generados por la propia app.</sub></p>
 
 ## Uso
 1. En PokerStars activa el guardado del historial de manos, con el **idioma en inglés** (el programa solo entiende ese formato).
@@ -39,7 +71,7 @@ Menú lateral: **Dashboard · Jugadores · Informes · Gráficas · Sesiones · 
 - **Modo Juego** (banner) mientras haya mesas abiertas, y **HUD por formato** configurable (por defecto, Zoom apagado).
 - Si has jugado con varios nicks, se unifican como "tú".
 
-## Estado
+## Estado del proyecto
 - **Fase 1** (hecha): importador en vivo, HUD en mesa.
 - **Fase 2** (hecha): motor de estadísticas (100+ hechos por jugador y mano, lenguaje de estadísticas propio compilado a SQL, caché,
   migraciones, ejecutable único).
