@@ -8,7 +8,7 @@
 ![.NET 8](https://img.shields.io/badge/.NET-8-512BD4?logo=dotnet)
 ![WPF](https://img.shields.io/badge/UI-WPF-5C2D91)
 ![SQLite](https://img.shields.io/badge/datos-SQLite-003B57?logo=sqlite)
-![Licencia MIT](https://img.shields.io/badge/licencia-uso%20personal-orange)
+![Licencia](https://img.shields.io/badge/licencia-uso%20personal-orange)
 ![Sin red](https://img.shields.io/badge/red-nunca-success)
 
 [Características](#características) · [Instalación](#uso) · [Capturas](#capturas) · [Estadísticas propias](#estadísticas-propias) · [Diseño](DESIGN.md) · [Decisiones](docs/DECISIONS.md)
